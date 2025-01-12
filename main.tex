@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{mathtools}
+\geometry{margin=1in}
+\usepackage[many]{tcolorbox}
+
+% TOC formatting
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsecpagefont}{\bfseries}
+
+\newcommand{\defn}[0]{\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{DEF:}}
+\newcommand{\ex}[0]{\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{Ex:}}
+
+
+\begin{document}
+% Custom title layout
+\begin{center}
+    {\LARGE \textbf{Introduction to Functional Analysis}} \\[0.5em]
+    {\large Claire Driedger} \\[0.3em]
+    {\normalsize December 2024}
+\end{center}
+\noindent
+\colorbox{gray!20}{%
+  \parbox{\textwidth}{%
+    References: Introductory Functional Analysis with Applications, \textit{Kreyszig}; 
+    lectures by someone in MATH301 at the University of Otago, New Zealand.
+  }
+}
+
+\tableofcontents
+\newpage
+
+\section{Metric Spaces}
+\defn{}
+A metric space is a pair $(X,d)$, where $X$ is a set and we define a \textit{distance function} $ d: X \times X \to \mathbb{R} $ such that for all $x, y, z \in X$:
+\begin{enumerate}[label= (M\arabic*), left=1cm]
+    \item \textit{d} is real-valued, finite and nonnegative
+    \item $\mathit{d}(x, y) = 0 \iff x = y$
+    \item $\mathit{d}(x, y) = \mathit{d}(y, x)$ \hfill (Symmetry)
+    \item $\textit{d}(x, y) \leq \textit{d}(x, z) + \textit{d}(z, y)$ \hfill (Triangle Inequality)
+\end{enumerate}
+$X$ is called the \textit{underlying set} of (X, \textit{d}). Its elements are called points. 
+By induction, we can obtain the generalized triangle inequality from (M4):
+\[ \textit{d} (x_1, x_n) \leq \textit{d}(x_1, x_2) + \textit{d}(x_2, x_3) + \cdots + \textit{d}(x_{n-1}, x_n). \hfill (1)
+\]
+\textcolor{red}{does the generalized triangle inequality also need to hold on all metric spaces?}
+////
+\defn{}
+A subspace $(Y, \tilde{d})$ of $(X, d)$ is obtained by restricting $d$ to $Y \times Y$, denoted as $\tilde{d}$ = $d|_{Y\times Y}$ where $Y\subset X$.
+\subsection{Some metric spaces}
+\vspace{1em}
+\noindent
+\ex{}
+The \textit{n-dimensional Euclidean space} $\mathbb{R}^n$ is the set of all ordered n-tuples of real numbers
+\[ x = (\xi_1,\xi_2,\|dots,\xi_n), \quad\quad y = (\eta_1, \eta_2, \cdots, \eta_n) \]
+with \textit{d} as the \textit{Euclidean metric}:
+\[ d(x,y) = \sqrt{(\xi_1 - \eta_1)^2 +(\xi_2 - \eta_2)^2 + \cdots + (\xi_n - \eta_n)^2}. \]
+The \textit{n-dimensional unitary space} $\mathbb{C}^n$ is the set of all ordered n-tuples of \textit{complex} numbers with metric defined by
+\[ d(x,y) = \sqrt{|\xi_1 - \eta_1| +|\xi_2 - \eta_2| + \|dots + \\xi_n - \eta_n|}. \]
+
+\vspace{1em}
+\noindent
+\ex{}
+The \textit{2-dimensional Euclidean space} $\mathbb{R}^n$ is the set of all ordered n-tuples of real numbers
+\[ x = (\xi_1,\xi_2, \cdots,\xi_n), \quad\quad y = (\eta_1, \eta_2,..., \eta_n) \]
+with \textit{d} as the \textit{Euclidean metric}:
+\[ d(x,y) = \sqrt{(\xi_1 - \eta_1)^2 +(\xi_2 - \eta_2)^2 + ... + (\xi_n - \eta_n)^2}. \]
+\fcolorbox{black}{red!50}{\hbox to 40pc{\vbox to 5pc{is it l1?? Note that more than one metric can be defined on the same underlying set. Consider the \textit{Manhattan distance} defined on $\mathbb{R}^2$:
+\[ d(x,y) = |\xi_1 - \eta_1| +|\xi_2 - \eta_2|. \]
+This is called the $l^1$ metric.}}}
+\\\\
+The \textit{n-dimensional unitary space} $\mathbb{C}^n$ is the set of all ordered n-tuples of \textit{complex} numbers with metric defined by
+$$ d(x,y) = \sqrt{|\xi_1 - \eta_1| +|\xi_2 - \eta_2| + ... + |\xi_n - \eta_n|}. $$
+****?? Let $\xi_i = a + b\textit{i}$ and $\eta_i = c + d\textit{i}$. Then $$|\xi_i - \eta_i| = |a + b\textit{i} - (c + d\textit{i})| = |a - c + (b - d)\textit{i} \coloneq \sqrt{(a - c)^2 + (b - d)^2}. $$
+
+\vspace{1em}
+\noindent
+\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{Ex:}
+The sequence space $l^\infty$ is the set of all bounded sequences of all complex numbers. That is, every point is a complex sequence
+$$ x = (\xi_1, \xi_2,...) \quad\quad \mathrm{briefly } \quad\quad x = (\xi_j)$$
+such that for all \textit{j} = 1, 2, ... we have $$|\xi_j| \leq c_x,$$ where $c_x$ is a real number which may depend on $x$ but does not depend on $j$. The metric is defined by $$d(x, y) = \sup\limits_{j \in \mathbb{N}}|\xi_j - \eta_j|,$$
+where sup denotes the least upper bound.
+
+\vspace{1em}
+\noindent
+\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{Ex:}
+The function space C[\textit{a, b}] is the set of real-valued, well-defined and continuous functions of an independent real variable \textit{t} on an interval J = [a, b]. The metric is defined by
+$$d(x, y) = \max\limits_{t \in J}|x(t) - y(t)|,$$
+where \textit{max} denotes the maximum. This metric space is denoted as C[\textit{a, b}], and called a function space, because every point in C[\textit{a, b}] is a function.
+
+\subsection{Problems}
+\begin{enumerate}
+    \item Show that $d(x,y) \coloneq \sqrt{|x-y|}$ is a metric defined on $\mathbb{R}$.
+    \\\\
+    \textit{Solution.}
+    \\
+    We verify the four axioms of a metric space. 
+    \begin{enumerate}[label=(M\arabic*), left=1cm]
+    \item $\mathit{d(x, y) = \sqrt{|x-y|}}$ is real-valued, finite and nonnegative
+    \item $\mathit{d}(x, y) = 0 \iff \sqrt{|x - y|} = 0 \iff |x - y| = 0 \iff x = y$
+    \item $\mathit{d}(x, y) = \sqrt{|x - y|} = \sqrt{|y - x|} = \mathit{d}(y, x)$
+    \item $$\textit{d}(x, z) = \sqrt{|x - z|} \Rightarrow \textit{d}(x, z)^2 = |x - z|$$
+    $$\mathit{d}(x, y) + \mathit{d}(y, z) = \sqrt{|x - y|} + \sqrt{|y - z|} $$
+    $$ \Rightarrow (\textit{d}(x, y) + \textit{d}(y, z))^2 = (\sqrt{|x - y|} + \sqrt{|y - z|})^2 = |x - y| + |y - z| + 2\sqrt{|x-y||y-z|}$$
+    And therefore, since $|x - z| \leq |x - y| + |y - z| \leq |x - y| + |y - z| + 2\sqrt{|x-y||y-z|}$, we have that $\textit{d}(x, z)^2 \leq (\textit{d}(x, y) + \textit{d}(y, z))^2$. Since the square root function is order-preserving, we obtain $\textit{d}(x, z) \leq \textit{d}(x, y) + \textit{d}(y, z)$, as required.
+    $\hfill \blacksquare$
+    \end{enumerate}
+    \item Using the generalized triangle inequality in (1), prove that $$|d(x, y) - d(z, w)| \leq d(x,z) + d(y,w)$$
+    \textit{Solution.}
+    \\ Consider the relationships x $\rightarrow z \rightarrow w \rightarrow y \rightarrow x$. Then
+    $$ d(x, y) \leq d(x, z) + d(z, w) + d(w, y)$$
+    $$ d(z, w) \leq d(y, w) + d(x, y) + d (x, z), $$
+    where the second inequality uses (M3). We rearrange to obtain
+    $$ d(x, y) - d(z, w) \leq d(x, z)+ d(w, y)$$
+    $$ d(z, w) - d(x, y) \leq d(y, w) + d (x, z).$$
+    $$ \Rightarrow d(x, y) - d(z, w) \leq d(x, z)+ d(w, y) \leq d(x, y) - d(z, w)$$
+    $$ \Rightarrow |d(x, y) - d(z, w)| \leq d(y, w) + d (x, z)$$
+    $\hfill \blacksquare$
+\end{enumerate}
+\subsection{More metric spaces}
+We now provide examples of slightly more complex metric spaces.
+\\\\
+\noindent
+\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{DEF:}
+The sequence space \textit{s} is the set of \textit{all} (unbounded or bounded) sequences of complex numbers and the metric \textit{d} defined by
+$$d(x, y) = \sum_{j=1}^\infty \frac{1}{2^j}\frac{|\xi_j - \eta_j|}{1 + |\xi_j - \eta_j|},$$
+where $x = (\xi_j)$ and $y = (\eta_j)$. We cannot use the metric defined for $l^\infty$ since unbounded functions could violate the finiteness of (M1).
+\\
+\tcbhighmath[boxrule=0.5mm, colframe=orange!20, colback=orange!20, arc=10mm, size=fbox]{Thm:} The sequence space \textit{s} is a metric space. 
+\\\textit{Proof.}
+To prove that \textit{s} is a metric space, we use the auxiliary function \textit{f} defined on $\mathbb{R}$ by
+$$ f(t) = \frac{t}{1+t}.$$
+Differentiating using the product rule gives $f'(t) = 1/{1+t}^2$, which is positive, and hence \textit{f} is monotone increasing. Hence, $|a + b| \leq |a| + |b| \Rightarrow f(|a+b|) \leq f(|a| + |b|).$ Therefore,
+$$ f(|a + b|) = \frac{|a+b|}{1 + |a+b|} \leq \frac{|a| +|b|}{1 + |a| + |b|}.$$
+Let $z = (\zeta_j)$, and \textit{a} = $\xi_j - \zeta_j$ and $\textit{b} = \zeta_j - \eta_j$. Then $a + b = \xi_j + \eta_j$, so 
+$$\frac{|\xi_j - \eta_j|}{1 +|\xi_j - \eta_j|} \leq \frac{|\xi_j - \zeta_j|}{1+ |\xi_j - \zeta_j|} + \frac{|\zeta_j - \eta_j|}{1+|\zeta_j - \eta_j|}.$$
+$$\sum_{j=1}^{\infty}\frac{1}{2^j}\frac{|\xi_j - \eta_j|}{1 +|\xi_j - \eta_j|} \leq \sum_{j=1}^{\infty}\frac{1}{2^j}\frac{|\xi_j - \zeta_j|}{1+ |\xi_j - \zeta_j|} + \sum_{j=1}^{\infty}\frac{1}{2^j}\frac{|\zeta_j - \eta_j|}{1+|\zeta_j - \eta_j|}.$$
+$$d(x,y) \leq d(x, z) + d(z, y).$$ $\hfill \blacksquare$
+
+
+\end{document}
