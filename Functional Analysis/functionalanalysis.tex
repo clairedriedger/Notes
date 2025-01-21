@@ -10,6 +10,7 @@
 \usepackage{xcolor}
 \usepackage{geometry}
 \usepackage{mathtools}
+\usepackage[dvipsnames]{xcolor}
 \geometry{margin=1in}
 \usepackage[many]{tcolorbox}
 
@@ -17,8 +18,14 @@
 \renewcommand{\cftsecfont}{\bfseries}
 \renewcommand{\cftsecpagefont}{\bfseries}
 
-\newcommand{\defn}[0]{\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{DEF:}}
-\newcommand{\ex}[0]{\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{Ex:}}
+\newcommand{\defn}[0]{\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{\mathrm{DEF:}}}
+\newcommand{\ex}[0]{\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{\mathrm{Ex:}}}
+\newcommand{\thm}[0]{\tcbhighmath[boxrule=0.2mm, colframe=Melon, colback=Melon, arc=10mm, size=fbox]{\mathrm{Thm:}}}
+\newcommand{\thmpf}[0]{\tcbhighmath[boxrule=0.5mm, colframe=Melon, colback=white, arc=10mm, size=fbox]{\mathrm{Proof:}}}
+\newcommand{\lemma}[0]{\tcbhighmath[boxrule=0.5mm, colframe=Melon, colback=Melon, arc=10mm, size=fbox]{\mathrm{Lemma:}}}
+\newcommand{\lemmapf}[0]{\tcbhighmath[boxrule=0.5mm, colframe=Melon, colback=white, arc=10mm, size=fbox]{\mathrm{Proof:}}}
+\newcommand{\R}[0]{$\mathbb{R} $}
+\newcommand{\N}[0]{$\mathbb{N} $}
 
 
 \begin{document}
@@ -39,47 +46,68 @@
 \tableofcontents
 \newpage
 
+\section{Background}
+Let us begin by recalling some properties of the real numbers $\mathbb{R}$:
+
+\begin{enumerate}
+  \item Any non-empty, bounded subset S $\subset$ \R\,  has a least upper bound $\sup(S)$, which is a real number c such that $x \leq c$ for all $x \in S$,
+  and such that if $c'$ is any other number with this property then $c' \geq c$;
+  \item Similarly, any non-empty, bounded subset S $\subset$ \R\,  has a greatest lower bound $\inf(S)$, which is a real number c such that $c \leq x$ for all $x \in S$,
+  and such that if $c'$ is any other number with this property then $c \geq c'$;
+  \item \thm{} (Bolzano-Weierstrass) Any bounded sequence of reals has a convergent subsequence;
+  
+  The proof of the theorem relies on the Monotone Subsequence Theorem (Every Sequence has a Monotone Subsequence) and the Monotone Convergence Theorem (A monotone sequence $(a_n)$ converges $\iff$ it is bounded). 
+  
+  \item \defn{} A sequence $\{a_n\}_{n=1}^\infty$ is called a \emph{Cauchy sequence} if for every $\epsilon > 0$ there exists an $N \in $ \N\, such that if $m, n \geq $ \N, then $| a_m - a_n | < \epsilon$.
+  \\\thm{} Any Cauchy sequence of real numbers converges.\\
+  The proof relies on the fact that every Cauchy sequences is bounded and hence, by B-W, has a convergent subsequence.
+\end{enumerate}
+
+\noindent{}Recall the analytic definition of continuity: \\\\
+\noindent{}\defn{} If $f: A \to$ \R\, is a function, we say that $f$ is \emph{continuous at $a \in$ A}\, if, for any $\epsilon > 0$, we can find a $\delta > 0$ such that if $|x - a| < \delta$ then $|f(\mathrm{x}) - f(\mathrm{a})| < \epsilon$.\\\\  
+and the topological/neighborhood definition of continuity:\\\\
+\noindent{}\defn{} For all $V_{\varepsilon}(f(c))$, there exists $V_{\delta}(c)$ such that $x \in V_{\delta}(c) \cap A \implies f(x) \in V_{\varepsilon}(f(c))$.
 \section{Metric Spaces}
-\defn{}
-A metric space is a pair $(X,d)$, where $X$ is a set and we define a \textit{distance function} $ d: X \times X \to \mathbb{R} $ such that for all $x, y, z \in X$:
+
+\noindent{} \defn{}
+A metric space is a pair $(X,d)$, where $X$ is a set and $d$ is a \textit{distance function} $ d: X \times X \to \mathbb{R} $ such that for all $x, y, z \in X$:
 \begin{enumerate}[label= (M\arabic*), left=1cm]
     \item \textit{d} is real-valued, finite and nonnegative
     \item $\mathit{d}(x, y) = 0 \iff x = y$
     \item $\mathit{d}(x, y) = \mathit{d}(y, x)$ \hfill (Symmetry)
-    \item $\textit{d}(x, y) \leq \textit{d}(x, z) + \textit{d}(z, y)$ \hfill (Triangle Inequality)
+    \item $\textit{d}(x, z) \leq \textit{d}(x, y) + \textit{d}(y, z)$ \hfill (Triangle Inequality)
 \end{enumerate}
 $X$ is called the \textit{underlying set} of (X, \textit{d}). Its elements are called points. 
 By induction, we can obtain the generalized triangle inequality from (M4):
-\[ \textit{d} (x_1, x_n) \leq \textit{d}(x_1, x_2) + \textit{d}(x_2, x_3) + \cdots + \textit{d}(x_{n-1}, x_n). \hfill (1)
-\]
-\textcolor{red}{does the generalized triangle inequality also need to hold on all metric spaces?}
-////
-\defn{}
+\begin{equation}
+  \textit{d} (x_1, x_n) \leq \textit{d}(x_1, x_2) + \textit{d}(x_2, x_3) + \cdots + \textit{d}(x_{n-1}, x_n).
+\end{equation}
+
+\noindent{}\lemma{} Let $x, y, z$ be points in a metric space. Then we have
+\begin{equation}
+  |d(x, y) - d(x, z)| \leq d(y,z).
+\end{equation}
+\lemmapf{} We need to show that $d(x, y) - d(x, z) \leq d(y,z)$ and $d(x, z) - d(x, y) \leq d(y,z)$. These are both instances of the triangle inequality. $\hfill \blacksquare$\\\\
+\noindent\defn{}
 A subspace $(Y, \tilde{d})$ of $(X, d)$ is obtained by restricting $d$ to $Y \times Y$, denoted as $\tilde{d}$ = $d|_{Y\times Y}$ where $Y\subset X$.
 \subsection{Some metric spaces}
 \vspace{1em}
 \noindent
 \ex{}
 The \textit{n-dimensional Euclidean space} $\mathbb{R}^n$ is the set of all ordered n-tuples of real numbers
-\[ x = (\xi_1,\xi_2,\|dots,\xi_n), \quad\quad y = (\eta_1, \eta_2, \cdots, \eta_n) \]
-with \textit{d} as the \textit{Euclidean metric}:
-\[ d(x,y) = \sqrt{(\xi_1 - \eta_1)^2 +(\xi_2 - \eta_2)^2 + \cdots + (\xi_n - \eta_n)^2}. \]
-The \textit{n-dimensional unitary space} $\mathbb{C}^n$ is the set of all ordered n-tuples of \textit{complex} numbers with metric defined by
-\[ d(x,y) = \sqrt{|\xi_1 - \eta_1| +|\xi_2 - \eta_2| + \|dots + \\xi_n - \eta_n|}. \]
+\[x = (\xi_1,\xi_2,\cdots,\xi_n), \quad\quad y = (\eta_1, \eta_2, \cdots, \eta_n). \]
+There are several possible metrics on $\mathbb{R}^n$:
+\begin{align*}
+  d_1(x,y) &= \sum_{i=1}^{n}(\left|\xi_i - \eta_i\right|); \\
+  \vspace{-2em}
+  d_2(x,y) &= \left( (\xi_1 - \eta_1)^2 +(\xi_2 - \eta_2)^2 + \cdots + (\xi_n - \eta_n)^2 \right)^{1/2};\\
+  d_{\infty}(x,y) &= \max_{i \in \{1,2,\cdots, n\}} \left|\xi_i - \eta_i\right|.
+\end{align*}
+These are called the $\ell^1-$, $\ell^2-$ (or Euclidean) and $\ell^{\infty}$-distances, respectively.\\
 
-\vspace{1em}
-\noindent
-\ex{}
-The \textit{2-dimensional Euclidean space} $\mathbb{R}^n$ is the set of all ordered n-tuples of real numbers
-\[ x = (\xi_1,\xi_2, \cdots,\xi_n), \quad\quad y = (\eta_1, \eta_2,..., \eta_n) \]
-with \textit{d} as the \textit{Euclidean metric}:
-\[ d(x,y) = \sqrt{(\xi_1 - \eta_1)^2 +(\xi_2 - \eta_2)^2 + ... + (\xi_n - \eta_n)^2}. \]
-\fcolorbox{black}{red!50}{\hbox to 40pc{\vbox to 5pc{is it l1?? Note that more than one metric can be defined on the same underlying set. Consider the \textit{Manhattan distance} defined on $\mathbb{R}^2$:
-\[ d(x,y) = |\xi_1 - \eta_1| +|\xi_2 - \eta_2|. \]
-This is called the $l^1$ metric.}}}
-\\\\
-The \textit{n-dimensional unitary space} $\mathbb{C}^n$ is the set of all ordered n-tuples of \textit{complex} numbers with metric defined by
+The \emph{n-dimensional unitary space} $\mathbb{C}^n$ is the set of all ordered n-tuples of \emph{complex} numbers with metric defined by
 $$ d(x,y) = \sqrt{|\xi_1 - \eta_1| +|\xi_2 - \eta_2| + ... + |\xi_n - \eta_n|}. $$
+
 ****?? Let $\xi_i = a + b\textit{i}$ and $\eta_i = c + d\textit{i}$. Then $$|\xi_i - \eta_i| = |a + b\textit{i} - (c + d\textit{i})| = |a - c + (b - d)\textit{i} \coloneq \sqrt{(a - c)^2 + (b - d)^2}. $$
 
 \vspace{1em}
@@ -130,13 +158,13 @@ where \textit{max} denotes the maximum. This metric space is denoted as C[\texti
 We now provide examples of slightly more complex metric spaces.
 \\\\
 \noindent
-\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{DEF:}
+\defn{}
 The sequence space \textit{s} is the set of \textit{all} (unbounded or bounded) sequences of complex numbers and the metric \textit{d} defined by
 $$d(x, y) = \sum_{j=1}^\infty \frac{1}{2^j}\frac{|\xi_j - \eta_j|}{1 + |\xi_j - \eta_j|},$$
 where $x = (\xi_j)$ and $y = (\eta_j)$. We cannot use the metric defined for $l^\infty$ since unbounded functions could violate the finiteness of (M1).
 \\
-\tcbhighmath[boxrule=0.5mm, colframe=orange!20, colback=orange!20, arc=10mm, size=fbox]{Thm:} The sequence space \textit{s} is a metric space. 
-\\\textit{Proof.}
+\thm{} The sequence space \textit{s} is a metric space. 
+\\\thmpf{}
 To prove that \textit{s} is a metric space, we use the auxiliary function \textit{f} defined on $\mathbb{R}$ by
 $$ f(t) = \frac{t}{1+t}.$$
 Differentiating using the product rule gives $f'(t) = 1/{1+t}^2$, which is positive, and hence \textit{f} is monotone increasing. Hence, $|a + b| \leq |a| + |b| \Rightarrow f(|a+b|) \leq f(|a| + |b|).$ Therefore,
