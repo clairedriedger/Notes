@@ -1,6 +1,6 @@
-PWD c:\Users\clair\OneDrive\Desktop\COSC341\notes
+PWD c:\Users\clair\OneDrive\Desktop\Learning\notes\Theory of Computation
 INPUT C:\Users\clair\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\clair\OneDrive\Desktop\COSC341\notes\notes.tex
+INPUT c:\Users\clair\OneDrive\Desktop\Learning\notes\Theory of Computation\notes.tex
 OUTPUT notes.log
 INPUT C:\Users\clair\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\clair\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls

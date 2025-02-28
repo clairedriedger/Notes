@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.1.12)  28 FEB 2025 17:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.1.12)  28 FEB 2025 17:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/clair/OneDrive/Desktop/COSC341/notes/notes.tex
-(c:/Users/clair/OneDrive/Desktop/COSC341/notes/notes.tex
+**"c:/Users/clair/OneDrive/Desktop/Learning/notes/Theory of Computation/notes.tex"
+(c:/Users/clair/OneDrive/Desktop/Learning/notes/Theory of Computation/notes.tex
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
 (C:\Users\clair\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -858,12 +858,12 @@ Package rerunfilecheck Info: File `notes.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  28474 strings out of 473536
- 588026 string characters out of 5714956
+ 588262 string characters out of 5714956
  992668 words of memory out of 5000000
  51205 multiletter control sequences out of 15000+600000
  599555 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,10n,107p,455b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,10n,107p,480b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
 Output written on notes.pdf (2 pages, 150536 bytes).
 PDF statistics:

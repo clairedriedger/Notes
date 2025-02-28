@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1740781608.75868 "c:/Users/clair/OneDrive/Desktop/COSC341/notes/notes.tex" "notes.pdf" "notes" 1740781610.71644 0
+["pdflatex"] 1740782564.91272 "c:/Users/clair/OneDrive/Desktop/Learning/notes/Theory of Computation/notes.tex" "notes.pdf" "notes" 1740782566.85093 0
   "C:/Users/clair/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1740778906 82198 745dd39fb380f8ac97ec39a9393133ee ""
   "C:/Users/clair/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1736702907 12013393 14ec6a1f1e278288195b4f08aad0bc7b ""
   "C:/Users/clair/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256929440 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -200,11 +200,11 @@
   "C:/Users/clair/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/clair/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/clair/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/clair/OneDrive/Desktop/COSC341/notes/notes.tex" 1740781606 4094 c0b48c2733680c43322d112aab4a9036 ""
-  "notes.aux" 1740781610 499 ff43668123b6e50d9936054ea0ea4cff "pdflatex"
-  "notes.out" 1740781610 276 3275c55d2f09a1cccb28de2334d8b509 "pdflatex"
+  "c:/Users/clair/OneDrive/Desktop/Learning/notes/Theory of Computation/notes.tex" 1740781606 4094 c0b48c2733680c43322d112aab4a9036 ""
+  "notes.aux" 1740782566 499 ff43668123b6e50d9936054ea0ea4cff "pdflatex"
+  "notes.out" 1740782566 276 3275c55d2f09a1cccb28de2334d8b509 "pdflatex"
   "notes.tex" 1740781606 4094 c0b48c2733680c43322d112aab4a9036 ""
-  "notes.toc" 1740781610 99 cea86ad81d1271ffd9b7cc893e244ff1 "pdflatex"
+  "notes.toc" 1740782566 99 cea86ad81d1271ffd9b7cc893e244ff1 "pdflatex"
   (generated)
   "notes.aux"
   "notes.log"
