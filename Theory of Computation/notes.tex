@@ -2,6 +2,7 @@
 \usepackage{amssymb}
 \usepackage{dsfont}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage[utf8]{inputenc}
 \usepackage{ dsfont }
 \usepackage{enumitem}
@@ -48,11 +49,13 @@
 \renewcommand{\cftsecfont}{\bfseries}
 \renewcommand{\cftsecpagefont}{\bfseries}
 
+
 \newcommand{\defn}[0]{\tcbhighmath[boxrule=0.5mm, colframe=cyan!20, colback=cyan!20, arc=10mm, size=fbox]{\textbf{DEF:}}}
 \newcommand{\ex}[0]{\tcbhighmath[boxrule=0.5mm, colframe=pink, colback=pink, arc=10mm, size=fbox]{\textbf{Ex:}}}
 \newcommand{\thm}[0]{\tcbhighmath[boxrule=0.5mm, colframe=orange!20, colback=orange!20, arc=10mm, size=fbox]{\textbf{Thm:}}}
 \newcommand{\prop}[0]{\tcbhighmath[boxrule=0.5mm, colframe=orange!20, colback=orange!20, arc=10mm, size=fbox]{\textbf{Prop:}}}
-
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
 
 \newcommand{\subsubsubsection}[1]{%
   \vspace{1em}%
@@ -73,7 +76,7 @@
 \noindent
 \colorbox{gray!20}{%
   \parbox{\textwidth}{%
-    References: Lectures by Stephen Cranefield in COSC341 at the University of Otago, New Zealand; \href{https://www3.nd.edu/~kogge/courses/cse30151-fa17/Public/other/tikz_tutorial.pdf}{tikz tutorial} by Satyaki Sikdar
+    References: Lectures by Stephen Cranefield in COSC341 at the University of Otago, New Zealand; Lecture Slides mostly by Michael Albert; \href{https://www3.nd.edu/~kogge/courses/cse30151-fa17/Public/other/tikz_tutorial.pdf}{tikz tutorial} by Satyaki Sikdar
   }
 }
 
@@ -82,18 +85,21 @@
 
 \section{Deterministic Finite State Automaton (DFAs)}
 
+\subsection{Introduction to DFAs}
+
 \defn A \textit{deterministic finite state automaton (DFA)}, \textbf{A}, consists of the following:
-\begin{itemize}[itemsep=-2pt]
+\begin{itemize}[itemsep=-2pt]\setlength{\baselineskip}{10pt}
     \item A finite set $\Sigma$ called its \textcolor{red}{\underline{alphabet}},
     \item A finite set $\mathcal{S}$ called its \textcolor{red}{\underline{states}},
     \item A function $T :\mathcal{S} \times \Sigma \to \mathcal{S}$ called its \textcolor{red}{\underline{transition function}},
     \item A single element $s \in \mathcal{S}$ called its \textcolor{red}{\underline{start state}},
     \item A subset $A \subseteq \mathcal{S}$ called its \textcolor{red}{\underline{final states}} or \textcolor{red}{\underline{accepting states}}.
 \end{itemize}
+\textit{Note:} changes to the state of any model always occur sequentially, not in parallel.
 
-We begin with an example. Consider a light with two switches. Flipping either switch changes the state of the light.
+We begin with an example. Consider a light with two switches. Flipping either switch changes the state of the light.\\
 
-
+\quad\quad \ex 
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
 \centering % centers the figure
     \begin{tikzpicture}
@@ -109,23 +115,92 @@ We begin with an example. Consider a light with two switches. Flipping either sw
 \label{fig:2b1l}
 \end{figure}
 
+\begin{itemize}[itemsep=-2pt]\setlength{\baselineskip}{10pt}
+  \item The light starts in the \textbf{Off} state. 
+  \item In either state, making an input of either \textit{A} or \textit{B} switches to the other state. 
+  \item We consider the \textbf{On} state to be \textit{accepting} -- any sequence of inputs that leads to this state is considered successful
+  \item The successful inputs are all strings consisting of characters from ${A, B}$ that have an \underbar{odd} number of characters.
+\end{itemize}
+
+\quad\quad \ex 
+\begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
+  \centering % centers the figure
+      \begin{tikzpicture}[node distance=3cm]
+      
+      \node[state, initial] (Off) {};
+      \node[state, right of=Off] (A) {$A$};
+      \node[state, above of=Off] (B) {$B$};
+      \node[state, accepting, right of=B] (On) {On};
+      
+      \draw (Off) edge[bend left, left] node{$B$} (B);
+      \draw (B) edge[bend left, right] node{$B$} (Off);
+      
+      \draw (Off) edge[bend left, above] node{$A$} (A);
+      \draw (A) edge[bend left, below] node{$A$} (Off);
+      \draw (Off) edge[bend left, above] node{$A$} (A);
+      
+      \draw (On) edge[bend left, right] node{$B$} (A);
+      \draw (A) edge[bend left, left] node{$B$} (On);
+
+      \draw (B) edge[bend left, above] node{$A$} (On);
+      \draw (On) edge[bend left, below] node{$A$} (B);
+    \end{tikzpicture}
+  \caption{Two different buttons, one light}
+  \label{fig:2b1l}
+  \end{figure}
+
+\begin{itemize}[itemsep=-2pt]\setlength{\baselineskip}{10pt}
+  \item The light starts in the lower left state. 
+  \item The successful inputs are all strings consisting of characters from ${A, B}$ that have an \underbar{odd} number of each letter.  
+\end{itemize}
 
 
-another example:
+\quad\quad \ex \quad What does this machine do?
+
 \begin{center}
 	\begin{tikzpicture}
-	\node[state, initial] (0) at (0,0) {$0$};	
+	\node[state, accepting] (0) at (0,0) {$0$};	
 	\node[state, accepting] (1)  at (2.5,0) {$1$};
 	\node[state] (2) at (5,0) {$2$};
 	
 	\draw 	(0) edge[loop above] 						        node{$a$} (0)
-					(0) edge[above]								node{$b$} (1)
-					(1) edge[above]								node{$a,\!b$} (2)
-					(2) edge[loop above]						node{$a,\!b$} (2);					
-\end{tikzpicture}
+					(0) edge[bend left, above]							node{$b$} (1)
+          (1) edge[bend left, below]              node{$a$} (0)
+					(1) edge[below]								          node{$b$} (2)
+					(2) edge[loop above]						        node{$a,\!b$} (2);					
+  \end{tikzpicture}
 \end{center}
 
+\begin{itemize}[itemsep=-2pt]\setlength{\baselineskip}{10pt}
+  \item The machine starts in the \textcolor{red}{\underbar{state}}.
+  \item There are two buttons to press - \textit{a} and \textit{b}. These define the \textcolor{red}{\underbar{alphabet}} of the machine.
+  \item Each button press causes a \textcolor{red}{\underbar{transition}} according to the labelled arrows.
+  \item The sequence of button presses leaving us in an \textcolor{red}{\underbar{accepting state}} (coloured green) are the \textcolor{red}{\underbar{language}} accepted by the machine.
+\end{itemize}
 
+\quad\quad \ex 
+
+\begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
+  \centering % centers the figure
+      \begin{tikzpicture}[node distance=2cm]
+      
+      \node[state, initial] (Off) {0};
+      \node[state, accepting, right of=0] (1) {1};
+      \node[state, right of=1] (2) {2};
+
+      \draw (0) edge[loop above] node{$A$} (0);
+      \draw (0) edge[above] node{$B$} (1);
+
+      \draw (1) edge[above] node{$A,\!B$} (2);
+
+      \draw (2) edge[loop above] node{$A, \!B$} (2);  
+  \end{tikzpicture}
+  \label{fig:2b1l}
+  \end{figure}
+
+In this example, the accepted language is exactly ``zero or more copies of A followed by exactly one B".
+
+\subsection{Automata and Grammars}
 
 
 \end{document}
