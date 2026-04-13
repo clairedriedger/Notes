@@ -1,0 +1,1359 @@
+\documentclass[14pt,oneside]{extarticle}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage[scr=boondoxo,scrscaled=1.05]{mathalfa}
+\usepackage{xfrac}
+\usepackage[margin=0.15in]{geometry}
+\usepackage{float}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{libertine}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{stackengine}
+\usepackage{thm-restate}
+\usepackage{xcolor-solarized}
+\usepackage[side, ragged]{footmisc}
+\usepackage{marginnote}
+\usepackage{xsim}
+\usepackage{environ}
+\usepackage{tcolorbox}
+\usepackage{comment}
+\usepackage[colorlinks=true, linkcolor=darkgray, urlcolor=darkgray]{hyperref}
+\usepackage[raggedrightboxes]{ragged2e}
+\usepackage{cleveref}
+\usepackage[]{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage{shortcuts}
+\usepackage{dsfont}
+\usepackage{parskip}
+\usepackage{kvsetkeys}
+
+
+\tcbuselibrary{theorems,skins,breakable}
+
+\setlist[enumerate]{itemsep=\smallskipamount, topsep=\smallskipamount}
+
+% set underline colours
+\newcommand{\pinkul}[1]{{\setulcolor{solarized-magenta}\uline{#1}}}
+\newcommand{\orangeul}[1]{{\setulcolor{solarized-orange}\uline{#1}}}
+\newcommand{\blueul}[1]{{\setulcolor{solarized-blue}\uline{#1}}}
+
+% lecture counter and command
+\newcounter{lecture}
+\setcounter{lecture}{0}
+\newcommand{\lecture}{%
+  \refstepcounter{lecture}%
+  \begin{flushright}
+    \textcolor{darkgray}{\textbf{Lecture \thelecture}}
+  \end{flushright}%
+}
+\newcommand{\lectureno}{\thelecture}
+
+
+% can add more with same format as you wish
+% \renewcommand{\qedsymbol}{\scalebox{0.5}{$\blacksquare$}}
+% homework answers
+% TODO: uncomment to show answers
+% optional: use "problem" and corresponding "solution" environments. solutions are hidden when solution/print = true
+\xsimsetup{
+  load-style=layouts,
+  % solution/print=true,
+  exercise/template=minimal,
+  solution/template=runin,
+}
+
+\mdfdefinestyle{roundedStyle}{
+  roundcorner=7pt,
+  linewidth=0pt,
+  topline=false,
+  bottomline=false,
+  leftline=false,
+  rightline=false,
+  innertopmargin=-25pt,
+  skipbelow=-15pt,
+  skipabove=10pt
+}
+
+% usage: \begin{title*} (no numbering, if you want
+% numbering you'll have to adjust the spacing above ^)
+\mdtheorem[style=roundedStyle, startinnercode={\textbf{Proposition.  } }, backgroundcolor=solarized-orange!10]{proposition}{}
+
+\mdtheorem[style=roundedStyle, startinnercode={\textbf{Theorem.  } }, backgroundcolor=solarized-orange!10]{theorem}{}
+
+\mdtheorem[style=roundedStyle, startinnercode={\textbf{Corollary.  } }, backgroundcolor=solarized-orange!10]{corollary}{}
+
+\mdtheorem[style=roundedStyle, startinnercode={\textbf{Lemma.  } }, backgroundcolor=solarized-orange!10]{lemma}{}
+
+\mdfdefinestyle{sidelineStyle}{
+  roundcorner=7pt,
+  linewidth=2pt,
+  %doubleline=true,
+  topline=false,
+  linecolor=solarized-blue!50,
+  bottomline=false,
+  leftline=true,
+  rightline=true,
+  innertopmargin=-30pt,
+  skipbelow=-15pt,
+  skipabove=10pt
+}
+
+\mdtheorem[style=sidelineStyle, startinnercode={\textbf{Axiom.  } }, backgroundcolor=white]{axiom}{}
+
+\mdtheorem[style=sidelineStyle, startinnercode={\textit{Notation. } }, backgroundcolor=white]{notation}{}
+
+\mdtheorem[style=roundedStyle, startinnercode={\textbf{Definition.  } }, backgroundcolor=white]{definition}{}
+
+% \declaretheoremstyle[
+%   headfont=\normalfont\bfseries,
+%   bodyfont=\normalfont,
+%   spaceabove=6pt,
+%   spacebelow=6pt,
+%   headpunct={.},
+%   postheadspace=1em
+% ]{upright}
+
+% \declaretheorem[
+%   style=upright,
+%   % thmbox=S,
+%   name=\textbf{Definition},
+%   refname={Definition, definition}, numbered=no,
+%   % shaded={rulecolor=solarized-blue, rulewidth=2pt,bgcolor={rgb}{1,1,1}}
+% ]{definition}
+
+% \declaretheorem[
+%   style=upright,
+%   % thmbox=S,
+%   name=Axiom,
+%   refname={Axiom, axiom},
+%   numbered=no,
+%   shaded={rulecolor=solarized-blue, rulewidth=2pt}
+% ]{axiom}
+
+% \declaretheorem[
+%   style=roundedStyle,
+%   % thmbox=S,
+%   name=Lemma,
+%   refname={Lemma, lemma},
+%   numbered=no,
+%   shaded={rulecolor=solarized-orange, rulewidth=1pt, bgcolor={rgb}{1,1,1}}
+% ]{lemma}
+
+% \declaretheorem[
+%   style=upright,
+%   % thmbox=S,
+%   name=Corollary,
+%   refname={Corollary, corollary},
+%   numbered=no,
+%   shaded={rulecolor=solarized-orange, rulewidth=1pt, bgcolor={rgb}{1,1,1}}
+% ]{corollary}
+
+
+% \declaretheorem[
+%   style=upright,
+%   % thmbox=S,
+%   name=Theorem,
+%   refname={Theorem, theorem},
+%   numbered=no,
+%   shaded={rulecolor=solarized-orange, rulewidth=2pt}
+% ]{theorem}
+
+% \declaretheorem[
+  % thmbox=M,
+%   name=Example,
+%   refname={Example, example},
+%   numberwithin=section,
+%   shaded={rulecolor=solarized-magenta, rulewidth=1pt, bgcolor={rgb}{1,1,1}}
+% ]{example}
+
+% \declaretheorem[
+%   style=upright,
+%   name=Proposition,
+%   refname={Proposition, proposition},
+%   numbered=no,
+%   shaded={bgcolor=solarized-orange!10}
+% ]{proposition}
+
+% makes "quoted" text actually look correct
+\MakeOuterQuote{"}
+
+% page footer
+\newpagestyle{mypage}{%
+    \footrule
+    \setfoot{\small\textcolor{gray}{§\thesubsection}}{\small\textcolor{gray}{\textit{\sectiontitle: \textbf{\subsectiontitle}}}}{\textcolor{gray}{\small p. \thepage}}
+}
+
+\newcommand{\subsubsubsection}[1]{%
+  \vspace{1em}%
+  \noindent\textit{#1}%
+  \vspace{0.5em}%
+  \par%
+}
+
+% Proof
+\NewDocumentCommand{\pf}{+m}{
+    \begin{proof}
+        #1
+    \end{proof}
+}
+
+% Example
+\newenvironment{example}{
+    \par
+    \vspace{5pt}
+    \noindent\textbf{Example.}
+    \begin{tcolorbox}[
+        blanker, breakable, left=5mm, parbox=false,
+        before upper={\parindent15pt},
+        after skip=10pt,
+        borderline west={1mm}{0pt}{solarized-magenta!50}]
+}{
+    \end{tcolorbox}
+    \vspace{5pt}
+}
+
+\NewDocumentCommand{\ex}{+m}{
+    \begin{example}
+        #1
+    \end{example}
+}
+% Solution
+\NewDocumentCommand{\sol}{+m}{
+    \begin{proof}
+        \orangeul{Sol:}\quad
+        #1
+    \end{proof}
+}
+
+
+% Remark
+\NewDocumentCommand{\rmk}{+m}{
+    {\noindent \textbf{\underline{\color{solarized-violet}#1}}}
+}
+
+\newenvironment{remark}{
+    \par
+    \vspace{5pt}
+    \noindent\textit{Remark.}
+    \begin{tcolorbox}[
+        blanker, breakable, left=5mm, parbox=false,
+        before upper={\parindent15pt},
+        after skip=10pt,
+        borderline west={0.75mm}{0pt}{solarized-violet!50}]
+}{
+    \end{tcolorbox}
+    \vspace{5pt}
+}
+
+\NewDocumentCommand{\rmkb}{+m}{
+    \begin{remark}
+        #1
+    \end{remark}
+}
+
+
+% title page settings
+\newcommand{\pageauthor}{Claire Driedger}
+\newcommand{\pagetitle}{Introduction to General Topology}
+\newcommand{\pagedescription}{Introduction to point set topology. Basic set theory and logic. Metric spaces; completeness, the Cantor and Baire spaces. Topological spaces; continuity, the separation axioms, the product topology, compactness, Baire measurability.}
+\newcommand{\pageprofessor}{Prof. Anush Tserunyan}
+\newcommand{\pagesemester}{Winter 2026 }
+
+
+\titleformat{\section}
+{\centering\normalfont\Large\bfseries}
+{\thesection}{1em}{}
+
+
+\newcommand{\thetitle}{
+  \noindent
+  \vspace*{5em}\\
+  {\fontsize{80}{100}\selectfont \pagetitle}\\
+  {\small{\pagedescription}}
+  \vspace*{2em}\\
+  % \vspace*{2em}
+ {\small Based on lectures from \pagesemester by \pageprofessor}\\
+ {\small Notes by \pageauthor}
+ \vspace*{5em}
+% \end{center}
+}
+
+\begin{document}
+\setstretch{1}
+\noindent
+\begin{center}
+    \thetitle
+\end{center}
+
+\begin{footnotesize}
+\textit{Note to the Reader.} You will do well to read the following notes in detail, as lots of notation, proof techniques, and ideas are introduced subtly. Also, please note the following abbreviations will be used in these notes:
+\begin{itemize}[label=$\rightarrow$, nosep]
+  \item TFAE: The Following Are Equivalent
+  \item ATAC: Assume Towards A Contradiction
+  \item WLOG: Without Loss Of Generality
+  \item \textcolor{red}{$^* \,$}, or \textcolor{red}{AC}: \textit{uses the Axiom of Choice}
+  \item w.r.t.: With Respect To
+  \item s.t.: Such That
+\end{itemize}
+\end{footnotesize}
+
+\setstretch{1.2}
+
+% display equation spacing
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+
+\begin{footnotesize}
+  \tableofcontents
+\end{footnotesize}
+
+% "enables" footer with section+subsection, etc. just comment it out if you don't want it
+% \pagestyle{mypage}
+
+% makes sections a very dark gray + centered
+\titleformat{\section}
+{\color{darkgray}\centering\normalfont\Large\bfseries}
+{\color{darkgray}\thesection}{1em}{}
+
+% need to change margins and such here for rest of document
+% kind of messy but what can you do
+\newpage
+% modify these as you wish
+\newgeometry{margin=0.5in, top=0.5in, bottom=0.5in, marginparwidth=0.0in, marginparsep=0.3in, outer=0.5in, includemp}
+\parskip=0.6em
+
+%\small
+
+\lecture
+
+\section{Naive Set Theory}
+\subsection{Set Operations}
+The existence of the following sets is given by the axioms of Zermelo-Fraenkel (ZF).
+Let $X$ be a set. For a subset $A \subseteq X$, write $A^c$ or $X \setminus A$ for the \defn{complement} of $A$ inside $X$, i.e.
+  \[A^c = \{x \in X: x \notin A\}.\]
+For a set of sets $\mathscr{S}$, we denote by $\cup \, \mathscr{S}$ the \defn{union} of all sets in $\mathscr{S}$, i.e. 
+  \[\cup \, \mathscr{S} = \{x: \exists A \in \mathscr{S}, x \in A\}.\]
+In particular, if $\mathscr{S} =  \{A,B\}$, then $\cup \, \mathscr{S} = A \cup B$. In other words,
+\[\cup \, \mathscr{S} = \bigcup_{A \in \mathscr{S}} A.\]
+Another example is if $\mathscr{S} = \{A_n: n \in \N\}$, then $\cup \, \mathscr{S} = \bigcup_{n \in \N} A_n$.
+Similarly, for a set $\mathscr{S}$ of sets, we denote by $\cap \, \mathscr{S}$ the \defn{intersection} of all sets in $\mathscr{S}$, i.e.
+  \[\cap \, \mathscr{S} = \{x: \forall A \in \mathscr{S}, x \in A\}.\]
+For a set $X$, its \defn{powerset} $\mathscr{P}(X)$ is the set of all subsets of $X$, including $\emptyset$. For example, if $X$ has $3$ elements, $\mathscr{P}(X)$ has $2^3$ (binary tuple of decisions).
+For sets $X,Y$, their \defn{cartesian product} is the set 
+\[X \times Y = \{(x,y): x \in X, y \in Y\}. \]
+For example, if $X$ has $2$ elements and $Y$ has 3, there are $6$ elements in $X \times Y$.
+
+\subsection{Functions}
+\begin{definition*}
+  A \defn{function} $f$ from a set $X$ to a set $Y$ is a ``set of arrows'' from $X$ to $Y$ satisfying that for each $x \in X$, there is exactly one outgoing arrow from $x$ to an element in $Y$. Formally, $f$ is a subset of $X \times Y$ such that $\forall x \in X$, there is a unique $y \in Y$ with $(x,y) \in f$. However, instead of writing $(x,y) \in f$, we write $f(x) = y$. We denote a function $f$ from $X$ to $Y$ by $f:X \to Y$.
+\end{definition*}
+
+\pic
+
+For a function $f:X \to Y$ and sets $A \subseteq X$, $B \subseteq Y$, we denote by:
+\begin{itemize}[label=$\rightarrow$, nosep]
+  \item $f(A) = \{f(a): a \in A\} = \{y \in Y: \exists a \in A \stt f(a) = y\}$, and call this set the $f-$image of $Y$.
+  \item $f^{-1}(B)= \{x \in X: f(x) \in B\}$ and call this set the $f-$preimage of $B$.
+\end{itemize}
+Note that
+\[f(f^{-1}(B)) \subseteq B \text{ and } f^{-1}(f(A)) \supseteq A\]
+and equalities hold if $f$ is injective and surjective (resp).
+
+\begin{definition*}
+  A function $f$ is \defn{injective} if each $y \in Y$ has $\leq 1$ $f-$preimage i.e. $f^{-1}(\{y\})$ has $\leq 1$ element. Equivalently, if $f(x_1) = f(x_2)$ then $x_1 = x_2$ for all $x_1, x_2 \in X$. Also, $f$ is \defn{surjective} if every $y \in Y$ has an $f-$preimage i.e. $f^{-1}(\{y\}) \neq \emptyset$. Finally, $f$ is \defn{bijective} if it is both injective and surjective.
+\end{definition*}
+
+\begin{definition*}
+  For $f: X \to Y$ and $g:Y \to Z$, define $g \circ f: X \to Z$ by 
+  \[g \circ f = g(f(x)) \]
+  and call this the \defn{composition} of $f$ and $g$.
+  Composition is associative i.e. if $f: X \to Y$, $g:Y \to Z$, $h:Z \to W$, then 
+  \[h \circ (g \circ f) = (h \circ g) \circ f.\]
+\end{definition*}
+\begin{definition*}
+  For $f: X \to Y$, we call a function $g: Y \to X$ its
+  \begin{itemize}[label=$\rightarrow$, nosep]
+    \item \defn{left-inverse} if $g \circ f: X \to X$ is identity i.e. $g \circ f(x) = x$ for all $x \in X$.
+    \item \defn{right-inverse} if $f \circ g: Y \to Y$ is identity on $Y$.
+    \item \defn{inverse} (two-sided) if it is both a left and right inverse i.e. $g \circ f (x) = x$ $\forall x \in X$ and $f \circ g (y) = y$ $\forall y \in Y$.
+  \end{itemize}
+\end{definition*}
+
+\rmkb{Left and right inverses, if they exist, may not be unique, but if an inverse exists, it is unique and we denote it $f^{-1}$. To see this uniqueness, if $g$ is a right inverse and $h$ is a left inverse, then 
+\[g = \id_X \circ g = (h \circ f) \circ g = h \circ (f \circ g) = h \circ \id_Y = h.\]}
+
+\begin{proposition*} Let $f:X \to Y$, $X \neq \emptyset$. Then:
+  \begin{enumerate}[label=\textbf{\alph*)}]
+    \item $f$ admits an inverse $\iff$ $f$ is bijective.
+    \item $f$ admits left inverse $\iff$ $f$ is injective.
+    \item $f$ admits a right inverse $\ACstar \ACstar \iff$ $f$ is surjective.
+  \end{enumerate}
+\end{proposition*}
+\pf{
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin=*]
+  \item follows from $(b)$ and $(c)$, or can be proved directly (exercise).
+
+  \item: $\implies$: Let $g: Y \to X$ be left inverse of $f$ i.e. $g \circ f = \id_X$. Then for any $x_1, x_2 \in X$ if $f(x_1) = f(x_2)$, then 
+  \[x_1 = g \circ f (x_1) = g \circ f (x_2) = x_2.\]
+  $\impliedby$: If $f$ injective, then for each $y \in f(X)$, there is exactly one $x \in X$ with $f(x) = y$, denote $h(y) \coloneqq x$. Fix $x_0 \in X$, and define for each $y \in Y \setminus f(X)$, $h(x) \coloneqq x_0$. Clearly, $h \circ f(x) = x$ for all $x$ so $h$ is a left inverse. \textit{Note that this mapping is not unique, since we could have picked any $x_0 \in X$.}
+
+  \item: $\implies$: Let $g$ be a right inverse of $f$ i.e. $f \circ g(y) = y$ for all $y \in Y$. Fix $y \in Y$. Then $g(y) \in X$ and $f \circ g(y) = y$ so $y \in f(X)$ hence $f$ surjective. \\
+  $\impliedby$: Suppose $f$ is surjective. Define $g:Y \to X$ by mapping each $y \in Y$ to some element of $f^{-1}(\{y\})$. Then indeed, $\forall y \in Y$,
+  \[f \circ g (y) = f(g(y)) = y\]
+  so $g$ is a right inverse of $f$.
+\end{enumerate}
+}
+
+\pic
+
+The issue with the definition of $g$ is that $g$ is making an arbitrary choice of $f^{-1}(\{y\})$ for each $y \in Y$ and the existence of such a choice function has to be asserted by a separate axiom, called the axiom of choice (\textcolor{red}{AC}).
+
+\begin{axiom*}
+  Every set $\mathscr{S}$ of nonempty sets admits a choice function, namely there is a function
+  \[c: \mathscr{S} \to \cup \, \mathscr{S}\]
+  such that for each $A \in \mathscr{S}$, $c(A) \in A$.
+\end{axiom*}
+\pic
+
+\begin{remark}
+  \textcolor{red}{AC} is equivalent to ``every surjection admitting a right inverse''. The proof is left as HW.
+\end{remark}
+
+\subsection{Equinumerosity}
+\begin{definition*} 
+  Sets $A$, $B$ are said to be \defn{equinumerous} if there is a bijection $f : A \to B$. We denote this by $A \equiv B$. 
+  Note $A \equiv B \iff B \equiv A$ because the inverse of a bijection $A \to B$ is a bijection $B \to A$. We also write $A \xhookrightarrow{} B$ if $\, \exists \,$ an injection $f: A \to B$ and write $B \twoheadrightarrow A$ if $\, \exists \,$ a surjection $A \to B$.
+\end{definition*}
+
+\begin{theorem*} (Cantor-Schr\"{o}der-Bernstein).\\
+  If $A \inj B$ and $B \inj A$, then $A \equiv B$.
+\end{theorem*}
+
+\pf{See \textcolor{darkgray}{\normalsize \href{https://www.math.mcgill.ca/atserunyan/Teaching_notes/Cantor-Schr\"{o}der-Bernstein.pdf}{Cantor-Schr\"{o}der-Bernstein}}.}
+
+
+
+\lecture
+
+\begin{example}
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item Hilbert Hotel: $\N \equiv \N^+ \coloneqq \N\setminus \{0\}$.
+  
+
+    \indent\soln Indeed, $\N \to \N^+$ by $n \mapsto n+1$ is a bijection.
+    \item $[0,1] \equiv [0,1)$. Similarly, $[0,1) \equiv (0,1)$, so $[0,1] \equiv (0,1)$.
+    
+
+    \indent\textcolor{solarized-magenta}{\textit{Sol \#1}: } Carve Hilbert Hotel inside $[0,1]$ by taking any sequence $(x_n) \subseteq [0,1]$ of pairwise distinct elements, e.g. $x_n \coloneqq \sfrac 1 n$ so $x_1 = 1$. Then map each $x_n$ to $x_{n+1}$ and map every $x \notin \{x_n: n \in \N+\}$ to itself. This is clearly a bijection $[0,1] \to [0,1)$.
+    
+
+    \indent\textcolor{solarized-magenta}{\textit{Sol \#2}: } Clearly $[0,1) \inj [0,1]$ and also $[0,1] \inj [0,1)$ by the scaling map with $\sfrac 1 2$. Thus, by C-S-B, $[0,1] \equiv [0,1)$.
+
+    \item $(a,b) \equiv (c,d)$ for all $a < b$, $c < d$ in $\R$.
+    
+    \indent\soln $f: (a,b) \to (c,d)$ linear by 
+    \[x \mapsto \frac{d-c}{b-a}(x-a)+c.\]
+    This is a bijection with inverse defined similarly.
+
+    \item $\R \equiv (a,b)$. It is enough to prove $\R \equiv (-1,1)$.
+    
+    \pic
+    
+    \indent\soln Let $f: (-1,1) \to \R$ by $x \mapsto \frac{x}{1-|x|}$, or $\tan(\sfrac {\pi} {2} x)$, for example. One easily verifies this is a bijection, for example by constructing an inverse.
+
+    \item $\mathscr{P}(X) \equiv 2^X$ for any set $X$.
+    In general, for sets $A$, $B$, we denote by $B^A$ the set of all functions from $A$ to $B$. For example, $\R^3$ is the set of triples of reals, and each triple $(x_0,x_1,x_2)$ is a function from $3 \coloneqq \{0,1,2\}$ to $\R$ given by $i \mapsto x_i$. Similarly, a sequence of reals $(x_n)$ is just a function $\N \to \R$ given by $n \mapsto x_n$. We denote the set of sequences by $\R^\N$. Thus, $2^X$ is the set of all $0$-$1$-valued functions on $X$, in other words, indicator functions of sets. 
+
+    \indent\soln Define $f: \mathscr{P}(X) \to 2^X$ by mapping each subset $A \subseteq X$ to its indicator function $\mathds{1}_A: X \to \{0,1\} \coloneqq 2$ given by 
+    \[\mathds{1}_A \coloneqq \begin{cases}
+      1 & \text{ if } x \in A \\
+      0 & \text{o/w}
+    \end{cases}.\]
+    Thus, we map $A \mapsto \mathds{1}_A$. This map $f$ has an inverse $g: 2^X \to \mathscr{P}(X)$ given by $h \mapsto \{x \in X: h(x) = 1\}$. Thus, $f$ is a bijection.
+
+    This shows, in particular, $\mathscr{N} \equiv 2^\N$ where $2^\N$ is the set of all binary (i.e. $0$-$1$) sequences over $\N$.
+  \end{enumerate}
+\end{example}
+
+We already proved the following:
+
+\begin{proposition*}
+  For any sets $A$, $B$, we have 
+  \[ A \inj B \ACstar \iff B \surj A.\]
+\end{proposition*}
+
+\subsection{Finite/Infinite Sets}
+The set of natural numbers $\N$ is given by set theory and it contains $0$ which is just $0$. Each natural number $n \in \N$ is equal to $\{0,1, \dots, n-1\}$ so $n < m \iff n \in m$.
+
+\begin{definition*}
+  A set is called \defn{finite} if it is equinumerous with a natural number i.e. there is a $n \in \N$ such that $A \equiv n = \{0,1, \dots, n-1\}$. It is called \defn{infinite} otherwise.
+\end{definition*}
+
+\begin{definition*}
+  A set $X$ is called \defn{Dedekind infinite} if it is equinumerous with its proper subset, i.e. there is a proper subset $X' \subsetneq X$ s.t. $X \equiv X'$ (e.g. $\N \equiv \N^+$). Otherwise, call $X$ \defn{Dedekind finite}.
+\end{definition*}
+
+\begin{proposition*} (Pigeonhole Principle) \\
+  Finite sets are Dedekind finite. In fact, for all $n, m \in N$, if $n \inj m$, then $n \leq m$.
+  
+\end{proposition*}
+
+\pf{
+We prove by induction on $m$. 
+
+For $m = 0 = \emptyset$, if $f: n \inj \emptyset$, then $n = \emptyset = 0$. Now, suppose the statement is true for arbitrary $m \in \N$ and prove for $m +1$. Recall $m = \{0, 1, \dots, m-1\}$ and $m+1 = \{0,1, \dots m\}$. Suppose $f: n \inj m+1$. 
+
+If $m \notin f(\{0, \dots n-1\})$, then in fact $f: n \inj m$, so $n \leq m < m+1$ by IH.
+
+Thus, assume there exists $k \in n$ s.t. $f(k) = m$. Then define $\tilde{f}: n \to m+1$ by $\tilde{f}(i) = f(i)$ if $i \notin \{k, n-1\}$ and $\tilde{f}(k) \coloneqq f(n-1)$ and $\tilde{f}(n-1) = f(k)$. Then $\tilde{f}$ is still injective, but it now maps $n-1$ to $m$, so the restriction of $\tilde{f}$ to $n-1 = \{0, \dots, n-2\}$ is an injection of $n-1$ into $m = \{0, \dots, m-2\}$. So by induction $n -1 \leq m$, so $n \leq m+1$.
+}
+
+\begin{theorem*}
+  For every set $X$, TFAE:
+  \begin{enumerate}[nosep]
+    \item $X$ infinite
+    \item $X$ Dedekind infinite
+    \item $\N \inj X$ (Hilbert Hotel)
+    \item $X \surj \N$ ($4 \implies 3$ uses \AC)
+  \end{enumerate}
+\end{theorem*}
+\pf{
+\begin{itemize}[label=]
+  \item
+  \item $(2) \implies (1)$: Contrapositive of Pigeonhole Principle.
+  \item $(3) \iff (4)$: We already did ($\impliedby$ uses \AC).
+  \item $(3) \implies (2)$: Do Hilbert Hotel inside $X$. Indeed, because $\N \inj X$, assume WLOG that $\N \subseteq X$. Then define  $f: X \to X \setminus \{0\}$ by
+  \[f(x) \coloneqq \begin{cases}
+    x & \text{ if } x \notin \N \\
+    x+1 & \text{ if } x \in \N
+  \end{cases}.\] 
+  This is clearly a bijection, just like with the proof of $[0,1] \equiv [0,1)$.
+  \item $(1) \implies (3)$: We define a function $f: \N \to X$ by definition $f(n)$ by induction/recursion on $n \in \N$. For arbitrary $n \in \N$, suppose $f(0), 
+  \dots, f(n-1)$ are already defined and define 
+  \[f(n) \coloneqq \text{ any element of $X \setminus \{f(0), \dots, f(n-1)\}$}.\]
+  In other words,
+  \begin{align*}
+    f(0)  & \coloneq \text{ choose some element of $X$}, \\
+    f(1)  & \coloneq \text{ choose some element of $X \setminus \{f(0)\}$}, \\
+    \vdots
+  \end{align*}
+  To make rigorous definition, we need \AC{} to get choice function $c: \mathscr{P}(X)\setminus \{\emptyset\} \to X$ s.t. if $A \subseteq X$, $c(A) \in X$. Then we define
+  \[f(n) \coloneqq c(X \setminus \{f(0), f(1), \dots, f(n-1)\}).\]
+  This is an injection by definition.
+  \item $(2) \implies (3)$: HW (w/o \AC{}).
+\end{itemize} }
+
+\subsection{Countability}
+\begin{definition*}
+  $X$ is \defn{countable} (\defn{ctbl}) if $X \equiv \N$ or $X$ is finite.
+\end{definition*}
+
+\begin{theorem*} (w/o \AC{}) For a set $X$, TFAE:
+  \begin{enumerate}[nosep]
+    \item $X$ ctbl
+    \item $X \inj \N$
+    \item $\N \surj X$.
+    
+    \rmk{Remark.} This means $\exists$ surjection $h: \N \to X$ so $X = h(\N) = \{h(n): n \in \N\}$. Call $h$ an \defn{enumeration} of $X$ and write $X = \{x_n: n \in N\}, x_n = h(n)$.
+  \end{enumerate}
+\end{theorem*}
+\pf{
+\begin{itemize}[label=]
+  \item
+  \item $(1) \implies (2)$: Trivial since either $X \equiv \N \inj \N$ or $N \equiv n = \{0, \dots n-1\} \subseteq \N$, injects by identity.
+  \item $(2)\implies (3)$: Done.
+  \item $(3)\implies (2)$: We know using \AC{} but one doesn't need AC when the domain is $\N$ since for each $x \in A$, choose \underline{least} natural number in its preimage.
+  \item $(2) \implies (1)$: WLOG assume $X \subseteq \N$ and is infinite. Define $f: \N \to X$ by defining each $f(x)$ by recursion on $n \in \N$. Suppose for arbitrary $n \in \N$ that $f(0), \dots, f(n-1)$ are defined. Set $f(n) \coloneqq \text{ least element of $X \setminus \{
+    f(0), \dots, f(n-1)
+  $}$, which is nonempty, because $X$ is infinite. It is enough to check that $f$ is a bijection.
+\end{itemize}
+}
+
+\lecture
+
+\begin{example}
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item $\N^k \equiv \N$ is ctbl.
+
+    \noindent\soln By induction on $k$, it is enough to prove that $\N \times \N \equiv \N$. Define $f: \N \times \N \to \N$ by \[f(n,m) \coloneqq \sum_{i=1}^{n+m}i + n = \frac{(n+m)(n+m+1)}{2} + n.\]
+    \pic \\
+    It's not hard to check that this is a bijection by finding the inverse. This is left as an exercise.
+
+    \item If $X$ is ctbl, then so is $X^k$ for all $k \in \N$.
+    
+    \noindent \soln $X$ is ctbl $\iff$ $\N \surj X$, so $N^k \surj X$. But $\N \equiv N^k$ so by composition, $\N \surj X^k$, hence $X^k$ is ctbl.
+
+    \item $Z \equiv N$ \\
+    \pic \\
+    \noindent \soln Let $f: \Z \to \N$ defined by
+    \[f(z) \coloneqq \begin{cases}
+      2z & \text{ if } z \geq 0 \\
+      2|z|-1 & \text{ if } z < 0
+    \end{cases}.\]
+    One can easily check bijection.
+
+    \item $\Q \equiv \N$.
+    
+    \noindent \soln Since $\Q \supseteq N$, $\Q$ infinite, so it is enough to show that $\N \surj \Q$. But $N \surj N^2 \surj \Z \times \N^+$ (by the previous example). We define $f: \Z \times \N^+$ by sending $(m,n) \mapsto \sfrac m n$ (every rational number can be written in this form). So $f$ is a surjection, hence $\Z \times \N^+ \surj \Q$, thus $\N \surj \Q$.
+  \end{enumerate}
+\end{example}
+
+We now define some useful notation. 
+
+\begin{notation*}
+  For a set $X$, \[X^0 = \{\emptyset\}.\] Then for $k \geq 1$, put \[X^k \coloneqq X^{k-1}\times X = X \times X \times \cdots \times X \text{ (\textit{k times})}.\] Thus, $X^k$ contains tuples of elements of length $k$. Denote by \[X^{<\N} := \bigcup_{k \in \N}X^k\] and think of this as the set of all finite tuples/words in $X$.
+\end{notation*}
+
+\begin{proposition*}
+  If $X$ is ctbl, then so is $X^{< \N}$.  
+\end{proposition*}
+
+\begin{proof}
+    HW (w/o AC). Since $X$ is ctbl, then there exists an injective function $f: X \to \N^+$, so WLOG take 
+\end{proof}
+
+The following generalizes the previous proposition but requires AC.
+
+\begin{proposition*}$\ACstar \,\,\,$ Ctbl union of ctbl sets is ctbl. In other words, if $\mathscr{S}$ is a ctbl set of ctbl sets, then $\cup \, \mathscr{S}$ is ctbl. In particular, for ctbl sets $X_n$, $n \in \N$, $\bigcup_{n \in \N} X_n$ is ctbl.
+\end{proposition*}
+\begin{proof}
+Let $\mathscr{S}$ be ctbl, so there exists an enumeration $\N \surj \mathscr{S}$ by $n \mapsto S_n$ i.e. $\mathscr{S} = \{S_n: n \in \N\}$. For each $n \in \N$, \underline{choose} an enumeration $f_n: \N \to S_n$ and define \[f: \N \times \N \to \cup \, \mathscr{S} = \bigcup_{n \in \N} S_n\]
+by mapping $(n,m) \to f_n(m)$ which is surjective by construction because for any $x \in \cup \, \mathscr{S}$, we have $x \in S_n$, hence $x = f_n(m)$ for some $m \in \N$. Thus, $\N \equiv \N^2 \surj \cup \, \mathscr{S}$.
+
+\pic
+
+Here we used \AC{} to get a function $n \mapsto f_n$ i.e. to choose a surjection $f_n: \N \to S_n$ for each $n \in \N$. That is, it gives us a witness of the countability of $S_n$.
+\end{proof}
+
+\begin{definition*}
+  A real $r \in \R$ is called \defn{algebraic} if it is a root of a polynomial with rational coefficients.
+\end{definition*}
+
+\begin{corollary*}
+  The set of all algebraic numbers is ctbl.
+\end{corollary*}
+\begin{proof}
+  Each polynomial is determined by a finite tuple of rationals (coefficients), hence $\Q^{<\N}$ surjects onto the set of polynomials with rational coefficients, so the set of such polynomials is ctbl since $\Q^{<\N}$ is. But each polynomial has only finitely-many roots, so the set of all roots (i.e. the set of all algebraic numbers) is a ctbl union of finite sets, hence ctbl.
+\end{proof}
+
+\subsection{Uncountable Sets and Cantor Diagonalization}
+We would like to prove that there are uncountable sets. We will show that $\mathscr{P}(\N)$ is unctbl. We will do so via Cantor's diagonalization method, which we now describe. Given a matrix with index set $I \times I$ of entries from $\{0,1\}$, this method produces an $I$-indexed vector that doesn't appear in the matrix (neither as a row nor column). Indeed, take the anti-diagonal
+\[\Delta^c(M)(i) \coloneqq \begin{cases}
+  1 & \text{ if M(i,i) = 0} \\
+  0 & \text{ if M(i,i) = 1} \\
+\end{cases}.\]
+Then the vector $\Delta^c(M)$ is not a column nor a row in $M$. 
+
+\pic
+
+We use this simple idea to prove the following:
+
+\begin{theorem*} (Cantor)\\
+  For any set $X$, $X \not\surj \mathscr{P}(X)$. In particular, $X \not\equiv \mathscr{P}(X)$.
+\end{theorem*}
+\pic
+\begin{proof}
+  Suppose toward a contradiction that there exists $f: X \surj \mathscr{P}(X)$. Let \[\Delta_f \coloneqq \{x \in X: x \notin f(x)\},\] and we show that $\Delta_f$ is not in $f(X)$. Indeed, for any $x \in X$, we have that $x \in f(x) \iff x \notin \Delta_f$, hence $\Delta_f \neq f(x)$. This contradicts the surjectivity of $f$.
+\end{proof}
+
+\begin{corollary*}
+  $\mathscr{P}(N)$ is unctbl.
+\end{corollary*}
+
+\begin{corollary*}
+  For any set $X$, $X \inj \mathscr{P}(X)$ but $\mathscr{P}(X) \not\inj X$.
+\end{corollary*}
+\begin{proof}
+  $X \inj \mathscr{P}(X)$ by $x \mapsto \{x\}$, and $\mathscr{P}(X) \not\inj X$ cannot be true since it would imply that $X \surj \mathscr{P}$ as we saw previously (by reversing the arrows of the injection), contradicting Cantor's theorem.
+\end{proof}
+
+\begin{example}
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item $\mathscr{P}(X) \equiv 2^X$ for all sets $X$, hence $X \not \surj 2^X$. In particular, $2^\N \equiv \mathscr{P}(\N)$ is unctbl.
+    \item $\R \equiv [0,1] \equiv 2^\N \equiv \mathscr{P}(\N)$, hence $\R$ and $[0,1]$ are unctbl.
+    
+    \noindent\soln{} We only need to show $2^\N \equiv [0,1]$. It is enough to show that $2^\N \inj [0,1]$ and $2^\N \surj [0,1]$ since then $[0,1] \inj 2^\N$ and hence $[0,1] \equiv 2^\N$ by the C-S-B theorem.
+
+    $2^\N \surj [0,1]$: Let $f: 2^\N \to [0,1]$ be defined by $(x_n)_{n \in \N} \mapsto 0.x_0x_1x_2\dots$ (binary representation). $f$ is surjective because each real in $[0,1]$ admits a binary representation including $1 = 0.11111\dots$. But this isn't injective since $0.010111\dots = 0.0110\dots$.
+
+    $2^\N \inj [0,1]$: Let $f:2^\N \to \{0,2\}^\N$ by $(x_n)_{n \in \N} \mapsto (2x_n)_{n \in \N}$. Map $h: \{0,2\}^\N \to [0,1]$ by $(y_n)_{n \in \N} \mapsto 0.y_1y_2\dots$ treated as ternary representation. This is an injection since the sequence $y_0, y_1, \dots$ doesn't have a $1$ in it, so there are no ambiguous representations: $0.2020222\dots = 0.2021000\dots \in h(\{0,2\}^\N)$. However, $h$ isn't surjective since $0.11 \notin h(\{0,2\}^\N)$. In fact, the image of $h$ is the Standard Cantor set, which will be discussed later.
+  \end{enumerate}
+\end{example}
+
+\begin{notation*} 
+  For sets $X$,$Y$, instead of $X \equiv Y$, write $|X| =|Y|$ and say that $X$ and $Y$ have the same \defn{cardinality}. We also write $|X| \leq |Y|$ to mean $X \inj Y$ and $|X| < |Y|$ to indicate $X \inj Y$ but $Y \not \inj X$. In this notation, $|\mathscr{P}(\N)| > |\N|$ but $|\mathscr{P}(\N)| = |2^\N| = |\R|$. We call this cardinality \defn{continuum} i.e. a set having cardinality continuum means it is equinumerous with $\R$. It is natural to wonder if there is a cardinality between $\N$ and $\R$ i.e. if there is a set $X$ s.t. $|\N| < |X| < |\R|$. The negative answer to this is known as the \defn{Continuum Hypothesis}. Whether this holds or not turned out to be independent from the set theory axioms (ZFC), proved by G\"{o}del and Cohen.
+\end{notation*}
+
+\lecture
+\section{Metric Spaces}
+\begin{definition*}
+  Let $X$ be a set. A \defn{metric} (\defn{distance function}) on $X$ is a map 
+  \[d: X \times X \to [0, \infty)\]
+  such that 
+  \begin{enumerate}[label=\roman*, nosep]
+    \item $d(x,x) = 0$ for all $x \in X$ and $d(x,y)= 0 \implies x = y$ for all $x, y \in X$.
+    \item (symmetry) $d(x,y) = d(y,x)$ for all $x,y \in X$.
+    \item ($\blacktriangle$-ineq) $d(x,z) \leq d(x,y) + d(y,z)$ for all $x, y, z \in X.$
+  \end{enumerate}
+  A set $X$ equipped with a metric $d$ is called a metric space and denoted $(X,d)$.
+\end{definition*}
+
+\begin{definition*}
+  Let $(X,d)$ be a metric space. For $x \in X$ and $r \geq 0$, we define the (\defn{open}) \defn{ball} at $x$ of radius $r$ to be 
+  \[B_r(x) \coloneqq \{y \in X: d(x,y) < r\}.\]
+  We also define the \defn{closed ball} at $x$ of radius $r$ as 
+  \[\overline{B}_r(x) \coloneqq \{y \in X: d(x,y) \leq  r\}.\]
+  By a ball in $X$, we mean an open ball $B_r(x)$ for some $x \in X$ and $r \geq 0$. Observe that if $r = 0$, then simply $B = \emptyset$.
+\end{definition*}
+
+\begin{example}
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+      \item $\R$ with its usual distance function $d(x,y) = |y-x|$ is a metric space. Balls in this metric space are exactly the bounded open intervals $(a,b)$. Indeed, $(a,b) = B_{\frac{b-a}{2}}(\frac{b+a}{2})$ and for each $x \in X$ and $r \geq 0$, $B_r(x) = (x-r, x+r)$.
+      \item \textit{(Discrete Space)} For any set $X$, the function
+      \[d(x,y) \coloneqq \begin{cases}
+        1 & \text{if } x \neq y \\
+        0 & \text{if } x = y
+      \end{cases}\]
+      defines a metric on $X$ called the \defn{0-1} or \defn{discrete metric}. In this metric, for every $x \in X$ and $r>0$, 
+      \[B_r(x) = \begin{cases}
+        \{x\} & \text{if } r \leq 1 \\
+        X & \text{o/w}
+      \end{cases}.\]
+      \item For $\R$, define $d_\frac{1}{2}(x,y) = \sqrt{|y-x|}$. This is a metric. \textit{Note:} In this metric, balls are also open intervals, as in the first example.
+      
+      \noindent\soln{} For $x, y, z \in \R$, we need to show 
+      \[\sqrt{|x-z|} \leq \sqrt{|x-y|} + \sqrt{|y-z|},\]
+      which is equivalent to:
+      \[(\sqrt{|x-y|}+\sqrt{|y-z|})^2 \geq |x-z|.\]
+      But $|x-y| + |y-z| +2\sqrt{|x-y|}\sqrt{|y-z|} \geq |x-y| + |y-z| \geq |x-z|$.
+
+      \item For $\R$, the function $d_2(x,y) \coloneqq |y-x|^2$ is \underline{not} a metric. Take $x < y < z$, then
+      \begin{align*}
+        |z-x|^2 = |z-y+y-x|^2 & = (z-y+y-x)^2 \\
+                              & =(|z-y|+|y-x|)^2 \\
+                              & = |z-y|^2 + |y-x|^2 + \underbrace{2|z-y||y-x|}_{> 0} \\
+                              > |z-y|^2 + |y-x|^2 \\
+                              = d_2(z,y) + d_2(y,x).
+      \end{align*} 
+      Hence, the $\blacktriangle$-inequality fails.
+
+      Exercise: Try to generalize the previous two examples. That is, show that for a strictly increasing function $\phi: [0,\infty) \to [0, \infty)$ with $\phi(0)=0$, if $\phi$ is concave, then $d_\phi(x,y) \coloneqq \phi(|x-y|)$ is a metric on $\R$, while if $\phi$ is convex, then $d_\phi$ is not a metric on $\R$.
+
+      \item \textit{($p$-metrics)} For the $d$-dimensional Euclidean space $\R^d$, there are various natural metrics on it. Fix $1 \leq p < \infty$. Then define $d_p: \R^d \times \R^d \to [0,\infty)$ by 
+      \[d_p(x,y) \coloneqq \left(\sum_{i=1}^{d}|x_i-y_i|^p\right)^{\frac{1}{p}}. \]
+      This indeed satisfies the $\blacktriangle$-inequality (HW), and it is called the \defn{$p$-metric}.
+
+      $\to$: For $p=2$, $d_2$ is called the \defn{Euclidean metric}.
+      
+      $\to$: For $p=1$, $d_1$ is often called the New York or Manhattan distance because, in $d=2$ ($\R^2$):
+      \[d_1(x,y) = |x_1-y_1| +|x_2-y_2|.\]
+
+      \pic
+
+      We can also define $d_p$ for $p=\infty$ as follows: 
+      \[d_\infty(x,y) \coloneqq \max_{1\leq i\leq d}|x_i-y_i|.\]
+      To understand the relationship between these metrics, let's look at the unit balls at $0$ as $p$ varies (for $d=2$):
+
+      \pic 
+
+      % \begin{figure}[h]
+      %   \framebox{
+      %   \begin{minipage}{0.65\textwidth}
+      %       \centering
+      %       \includegraphics[width=\textwidth]{2D_unit_balls.png}
+      %   \end{minipage}
+      % }
+      % \end{figure}
+      As the picture suggests, when $p \to \infty$, the metric $d_p$ tends to $d_\infty$. Indeed, this is true:
+      \[\lim_{p \to \infty}d_p = d_\infty.\]
+      Furthermore, all these $d_p$ metrics are Lipschitz equivalent.
+  % \end{enumerate}
+% \end{example}
+
+  \begin{definition*}
+    Let $X$ be a set. Two metrics $d_p$, $d_q$ on $X$ are called \defn{Lipschitz equivalent} if there are constants $C_1$, $C_2 >0$ such that:
+    \[C_1d_q \leq d_p \leq C_2 d_q.\]
+  \end{definition*}
+
+  \begin{proposition*}
+    For any $1 \leq p, q \leq \infty$, $d_p$ and $d_q$ are Lipschitz equivalent.
+  \end{proposition*}
+  \begin{proof}
+    We leave the proof as a HW exercise.
+  \end{proof}
+
+  % We now continue with a few more examples.
+
+  % \begin{example}
+  %   \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+      \item Let $G \coloneqq (V,E)$ be an undirected connected graph with a vertex set $V$ and an edge set $E$. The graph distance is the function $d_G: V \times V\to \N$ defined by
+      \[d_G(u,v) \coloneqq \text{length of a shortest path from $u$ to $v$.}\]
+
+      \pic 
+
+      In this example, $d_(u,v) = 2$ witnessed by the path $u-a-v$ (although there is also a longer path $u-a-b-v$). It is obvious that $d_G$ satisfies the $\blacktriangle$-inequality, and is hence a metric. Here too, as with the $0-1$ metric, singletons are balls of radius, say $\frac 1 2$.
+
+      \item Let $G$ be a group, for example $G = \Z$ or $\Z^d$ or the free group $\mathbb{F}_d$ on $d$-generators. Suppose $G$ is finitely generated and let $S$ be a symmetric set of generators, i.e. if $s \in X$, then $s^{-1} \in S$. For example, for $\Z$, we can take $S = \{1, -1 \}$ and for $\Z^2$, $S = \{\pm (1,0), \pm (0,1) \}$. For $\mathbb{F}_2 = \left<a,b\right>$, we take $S = \{a^{\pm 1}, b^{\pm 1}\}$. We define a graph with the vertex set $G$ itself and with edge set defined by $(g,h) \in E \iff h = gs$, for some $s \in S$. We call this graph the \defn{Cayley graph} of $G$ w.r.t. $S$ and denote it \defn{$\text{Cay}_S(G)$}.
+      
+      \pic 
+
+      The graph distance on the $\text{Cay}_S(G)$ turns the group $G$ into a metric space, opening another -- geometric -- avenue for studying the group. The subject that does this is called geometric group theory.
+
+      \item \textit{(Uniform Metric)} Let $X$ be a set. Denote by \defn{$B_(X)$} the set of all bounded real-valued functions on $X$. We recall that $f: X \to \R$ is called \defn{bounded} if $f(X)$ is a bounded subset of $\R$, i.e. $f(X) \subseteq (-r, r) = B_r(0)$ for some $r \geq 0$.
+      
+      Let $d_u: B(X) \times B(X) \to [0, \infty)$ be defined  by 
+      \[d_u(f,g) \coloneqq \sup_{x\in X}|f(x) - g(x)|.\]
+      Also, note that $B(X)$ is closed under finite linear combinations i.e. $B(X)$ is a vector space over $\R$. In particular, if $f,g \in B(X)$, then their sum $f+g$ and difference $f-g$ are also bounded, so $d_u(f,g) < \infty$.
+
+      \textbf{Claim:} The \defn{uniform metric}, $d_u$, is indeed a metric. 
+      
+      \noindent\soln{} For $\blacktriangle$-inequality, observe that for each $f,g,h \in B(X)$ and $x \in X$,
+      \begin{align*}
+        |f(x) - h(x)| & \leq |f(x) -g(x) + g(x) - h(x)| \\
+                      & \leq d_u(f,g) + d_u(g,h).
+      \end{align*}
+      Since this holds for all $x \in X$, and  by definition of the supremum as the least upper bound, we get
+      \[d_u(f,h) = \sup_{x\in X}|f(x) - h(x)| \leq d_u(f,g) + d_u(g,h).\]
+
+      \item \textit{(Tree Spaces (Cantor, Baire))} Let $\Sigma$ be a ctbl non-empty set, e.g. $\Sigma = 2 = \{0,1\}$ or $\Sigma = \N$. We can think of $\Sigma$ as our alphabet. Let \[X \coloneqq \Sigma^\N = \{(x_n)_{n \in \N}: x_n \in \Sigma \text{ for all } n \in \N\}.\]
+      So, for example, $2^\N$ is the set of $0$-$1$-valued sequences and $\N^\N$ is the set of sequences of natural numbers.
+
+      To picture this, we draw the set $\Sigma^{<\N}$ of all finite sequences in $\Sigma$ as a tree, depicted below for $\Sigma^2$.
+
+      \pic 
+
+      We then think of the elements of $\Sigma^\N$ as the infinite branches through this tree. Also, we define the \defn{realtor's metric} on $\Sigma^\N$ as follows: for $x \neq y \in \Sigma^\N$, 
+      \[d(x,y) \coloneqq 2^{- \Delta(x,y)}\]
+      where $\Delta(x,y) \coloneqq$ the least index $n \in \N$ with $x(n) \neq y(n)$. Of course, we set $d(x,y) \coloneqq 0$ if $x = y$.
+
+      \lecture
+
+      It is not hard to show that $d$ is a metric on $2^\N$, in fact, an \textit{ultrametric} i.e. the following strengthening of the $\blacktriangle$-inequality holds:
+      \[d(x,z) \leq \max\{d(x,y), d(y,z)\}.\]
+      \noindent\soln{} HW.
+      
+      For $2^{-(n+1)} < r \leq 2^{-n}$, observe that for any $x \in \Sigma^\N$, open balls are also closed, because
+      \begin{align*}
+        B_r(x) & = \{y \in \Sigma^\N : d(x,y) < r\}\\
+               & = \{y \in \Sigma^\N: d(x,y) \leq 2^{-n}\} \\
+               & = \overline{B}_{2^{-n}}(x) \\
+               & = \{y \in \Sigma^\N : y|_n = x|_n\} \eqqcolon [x|_n]
+      \end{align*}
+      where for any finite word $w \in \Sigma^{\N}$, we define the \defn{cylinder at $w$} to be 
+      \[[w] = [w]_\Sigma \coloneqq \{y \in \Sigma^\N: y|_{\ell(w)} = w\}\]
+      where $\ell(w)$ denotes the length of $w$.
+
+      \pic 
+
+      Observe that for all $y \in B_r(x)$,
+      \[B_r(y) = [y|_n] = [x|_n] = B_r(x)\]
+      so every element of a ball is a center of that ball.
+
+      When $\Sigma = 2$, we call $2^\N$ the \defn{Cantor space} and $\N^{\N}$ the \defn{Baire space}.
+    \end{enumerate}
+  \end{example}
+
+\begin{definition*}
+  For a metric space $X$, sets $Y, Z \subseteq X$, a point $x \in X$, define
+  \[\text{diam}(Y) \coloneqq \sup_{y_1, y_2 \in Y}\{d(y_1,y_2)\},\]
+  \[d(x,Y) \coloneqq \inf_{y \in Y} d(x,y)\]
+  and
+  \[d(Y,Z) \coloneqq \inf_{\substack{y \in Y \\ z \in Z}} d(y,z) = \inf_{y \in Y}(y,Z).\]
+  \begin{example}
+    \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+      \item $\text{diam}((0,1)) = 1$
+      \item $d(\text{graph}(x \mapsto 1/x, \R)) = 0$ \pic
+    \end{enumerate}
+  \end{example}
+\end{definition*}
+
+\begin{definition*}
+  For metric spaces $(X, d_X)$, $(Y, d_Y)$, call a function $f: X \to Y$ an \defn{isometry} if it preserves the metric, i.e. for all $x_1, x_2 \in X$, 
+  \[d_Y(f(x_1), f(x_2)) = d_X(x_1, x_2).\]
+  Note that an isometry is always injective (why?). Call $f$ an isometric isomorphism if it is a surjective isometry (hence, it is a bijection and both $f$, $f^{-1}$ are isometries).
+\end{definition*}
+\begin{definition*}
+For a metric space $(X,d)$, and a subset $Y \subseteq X$, we consider the restriction of $d$ to $Y$ (formally, the restriction of $d$ to the set $Y \times Y$) is a metric on $Y$, which we will still denote by $d$. We say that $(Y,d)$ is a subspace of $(X,d)$.
+\end{definition*}
+\textit{Observation.} Every isometry $f:X \to Y$ is an isometric isomorphism from $X$ to the subspace $f(X)$.
+
+\begin{proposition*}
+  Let $X$ be a metric space and let $Y \subseteq X$. Then the balls in the subspace $(Y,d)$ are exactly the intersections of balls of $(X,d)$ with $Y$ i.e. for all $y \in Y$ and $r \geq 0$, 
+  \[B_r^Y(y) = B_r^X(y) \cap Y.\]
+\end{proposition*}
+\begin{proof}
+  \begin{align*}
+    B_r^Y(y) & = \{x \in Y: d(y,x)<r\} \\
+             & = \{x\in X: d(y,x) < r\} \cap Y \\
+             & = B_r^X(y) \cap Y
+  \end{align*}
+\end{proof}
+
+\begin{example}
+    \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+      \item In $Y \coloneqq [0,1)\subseteq \R$, 
+      \begin{align*}
+        B_2^Y\left(\frac{1}{2}\right) & = [0,1) \\
+        B_1^Y\left(\frac{3}{4}\right) & = [0,1) \\
+        B_\frac{1}{2}^Y\left(\frac{3}{4}\right) & = (\frac{1}{4}, 1) \\
+        \overline{B}_\frac{1}{2}\left(\frac{1}{2}\right) & = [0,1) \quad \text{(`$1$' \textit{ does not exist in our world})}
+      \end{align*}  
+      \item In $Y \coloneqq [0,1] \cup \{2\}$, 
+      \begin{align*}
+        B_1(1) & = [0,1) \\
+        \overline{B}_1(1) & = [0,1] \cup \{2\} = Y
+      \end{align*}
+  \end{enumerate}
+\end{example}
+
+\textit{Caution.} The closed ball is $\geq$ the closure of an open ball. In particular, the closure of $B_1(1)$ is \underline{contained in} ($\leq$) the closed ball $\overline{B}_1(1)$, but isn't equal to it.
+
+\subsection{Open/Closed Sets}
+\begin{definition*}
+  In a metric space $(X,d)$, a set $U \subseteq X$ is called \defn{open} if it is an (arbitrary) union of (open) balls.
+\end{definition*}
+
+\begin{proposition*}
+  In a metric space $(X,d)$, 
+  \[\text{a set $U \subseteq X$ is open $\iff$ for all $u \in U$, there exists $r > 0$ such that $B_r(u) \subseteq U$.}\]
+\end{proposition*}
+\begin{proof}
+  $\implies:$ Let $U$ be open i.e. $U = \bigcup_{i \in I} B_i$ where each $B_i$ is an open ball. Fix $x \in U$, so $x \in B_i = B_{r_i}(x_i)$. Then if we define $r \coloneqq r_i - d(x,x_i) > 0$, it's true that
+  \[B_{r}(x) \subseteq B_{r_i}(x_i) \subseteq U.\]
+
+  \pic
+
+  $\impliedby$: For every $u \in U$, there exists $r_u >0 $ (\AC) such that $B_{r_u}(u) \subseteq U$. Then $U = \bigcup_{u \in U}B_{r_u}(u)$.
+\end{proof}
+
+Informally, being inside an open set means having the witness of a whole ball.
+
+\begin{definition*}
+  Call a set $\mathscr{D}$ \defn{closed} if its complement $X \setminus \mathscr{D}$ is open.
+\end{definition*}
+
+\subsubsection{Permanence Properties}
+In a metric space $(X,d)$, the collection of open sets is closed under arbitrary unions and finite intersections. Consequently (by DeMorgan), closed sets are closed under arbitrary intersections and finite unions.
+\begin{proof}
+  Closure of open sets under arbitrary unions is by definition. For finite intersections, it suffices to prove for the intersection of two open sets, by induction. Let $U, V \subseteq X$ be open. Fix $x \in U \cap V$. Then $x \in U$, so $\exists \, r_1 >0 \text{ s.t. } B_{r_1}(x) \subseteq U$ and $\exists \, r_2 > 0 \text{ s.t. } B_{r_2}(x) \subseteq V$. Then $r \coloneqq \min(r_1,r_2)$ works i.e. $B_r(x) \subseteq B_{r_1}(x) \cap B_{r_2}(x) \subseteq U \cap V$.
+
+  \pic
+\end{proof}
+
+\begin{example}
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item In $\R$ with the usual metric, open balls are \textit{bounded} open intervals $(a,b)$. Hence, open sets are arbitrary unions of intervals. But in fact, the following stronger proposition is true.
+    
+    \begin{proposition*}
+      Every open subset of $\R$ is a ctbl union of pairwise disjoint intervals.
+    \end{proposition*}
+    \begin{proof}
+      HW.
+    \end{proof}
+
+    \lecture
+    
+    \item In $(\R^d, d_2)$, all open rectangles are open sets, where an open rectangle is a set of the form $I_1 \times I_2 \times \cdots \times I_d$, with each $I_k \subseteq \R$ is an open interval.
+    
+    \noindent\soln{} For $x \in \R \coloneqq I_1 \times I_2 \times \cdots \times I_d$, for each coordinate $x_k \in I_k$, let $\epsilon_k$ be such that $(x_k - \epsilon_k, x_k + \epsilon_k) \subseteq I_k$. Set $\epsilon \coloneqq \min_{1 \leq k \leq d} \epsilon_k$. Then $B_\epsilon(x) \subseteq \R$.
+
+    \pic
+
+    This says that we can use open rectangles instead of balls when considering open sets in $\R^d$.
+
+    \item Let $\Sigma$ be a ctbl nonempty set, $X \coloneqq \Sigma^\N$, with the realtors metric, defined previously. Recall that every cylinder $[w]$ for $w \in \Sigma^{\N}$ is an open ball at $x \in \Sigma^{\N}$ that extends $w$ (write $x \extends w$) and it is also a closed ball at $x$. In particular, $[w]$ is open.
+    
+    \textbf{Claim}: $[w]$ is also closed.
+    \begin{proof}
+      Let $n \coloneqq \ell(w)$. Then 
+      \[[w]^c = \bigcup_{\substack{v \in \Sigma^n \\ v \neq }} [v],\]
+      hence $[w]^c$ is open, being a union of open sets. Thus, $[w]$ is closed.
+    \end{proof}
+    Thus, every cylinder is \defn{clopen} i.e. open and closed.
+  \end{enumerate}
+\end{example}
+
+\textit{Observation.} For any cylinders $[w]$ and $[v]$, they are either disjoint or one is contained in the other.
+\begin{proof}
+  If the word $w \succ v$, then $[w] \subseteq [v]$ and if $w \not\succ v$ and $v \not\succ w$, then there exists $i \in \N, i < \ell(w), i < \ell(v)$ with $w(i) \neq v(i)$. Hence $[w] \cap [v] = \emptyset$.
+\end{proof}
+
+\begin{proposition*}
+  Every open set in $\Sigma^N$ is a ctbl union of disjoint cylinders.
+\end{proposition*}
+\begin{proof}
+  The idea is it take maximal cylinders, equivalently, shortest words. let $U \subseteq \Sigma^\N$ be open. Take $W \coloneqq \{w \in \Sigma^\N: [w] \subseteq U \text{ and $\not\exists \,$ shorter $v \prec w$ with $[v] \subseteq U$}\}$. Clearly, for any two distinct $w_1, w_2 \in W$, we have $w_1 \not\prec w_2$ and $w_2 \not\prec w_1$, so $[w_1] \cap [w_2] = \emptyset$. Thus it suffices to show that $U = \bigcup_{w \in W} [w]$ because $W \subseteq \Sigma^{<\N} = \bigcup_{n \in \N}\Sigma^n$ is ctbl. By definition, $ \bigcup_{w \in W} [w] \subseteq U$. To show the converse, fix $x \in U$. Then $\exists \,$ open ball, namely a cylinder $[v]$ s.t. $x \in [v] \subseteq U$. Let $u \succ v$ be the shortest word such that $[u] \subseteq U$. Then $u \in W$ so $x \in \bigcup_{w \in \N}[w]$.
+\end{proof}
+
+\begin{proposition*}
+  Let $(X,d)$ be a metric space and $Y \subseteq X$. Then the open sets in the subspace $(Y,d)$ are exactly the sets of the form $U \cap Y$ where $U \subseteq X$ is an open set in $(X,d)$.
+\end{proposition*}
+\begin{proof}
+  HW.
+\end{proof}
+
+\begin{example} 
+  Let $X \coloneqq \R$ with the usual metric $d$.
+  \begin{enumerate}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item If $Y = [0,1]$, then $(\frac{1}{2}, 1]$ is open in the subspace. In fact, it is the open ball at $1$ of radius $1/2$.
+    \item If $Y = [0,1] \cup \{2\}$, then $\{2\}$ is open in the subspace $(Y,d)$, in fact, $\{2\} = B_{\sfrac{1}{2}}^Y(2)$. Also, $\{2\}$ is closed in $Y$ because $Y \setminus \{2\} = [0,1]$ is open since $[0,1] = \left(-\frac{1}{2}, \frac{3}{2}\right) \cap Y$.
+  \end{enumerate}
+\end{example}
+
+\subsubsection{Limits of Sequences in Metric Spaces}
+Recall that a sequence $(x_n)$ is just a function with domain $\N$.
+
+\begin{notation*}
+  For a subset $P \subseteq N$ (think of $P$ as `property' or `prime'), we write
+  \begin{itemize}[label=$\to$,nosep]
+    \item \defn{$\forall^\infty \in \N \,\, n \in P$} if \underline{all but finitely-many} $n \in \N$ are in $P$. Equivalently, $\exists \, k \in \N \text{ s.t. } \forall n \geq k, \, n \in P$. This is like saying `eventually'. Thus, 
+    \[\forall^\infty_n \equiv \exists \, k \in N \forall n \geq k. \]
+    \item \defn{$\exists^\infty \, n \in \N, n \in P$} if \defn{there are infinitely-many} $n$ in $P$, i.e. $P$ is infinite. Equivalently, $\forall k \in \N \exists \, n \geq k \text{ s.t. } n \in P$. Thus,
+    \[\exists^\infty_n \equiv \forall k \in \N \exists \, n \geq k. \]
+  \end{itemize}
+\end{notation*}
+
+\textit{Observation.}
+\[(\text{not } \forall^\infty_n \in \N, n \in P) \equiv \exists^\infty_n \in N, n \notin \N\]
+\[(\text{not } \exists^\infty_n \in \N, n \in P) \equiv \forall^\infty_n \in \N, n \notin P\]
+
+\begin{definition*}
+  Let $(X,d)$ be a metric space and $(x_n) \subseteq X$ be a sequence and $x \in X$. We say that $(x_n)$ \defn{converges} to $X$ and write \defn{$\lim_{n \to \infty} x_n = x$} if $\forall \epsilon > 0 \exists \, N \in \N \forall n \geq N, d(x,x_n) < \epsilon$. Equivalently, 
+  \[\forall \epsilon > 0 \text{, } \forall^\infty_n \text{ } \underbrace{d(x, x_n) < \epsilon}_{x_n \in B_\epsilon(x)}.\]
+  In other words, for every open ball $B$ at $x$, all but finitely-many $n$, $x_n \in B$. That is, most of the sequence is in any ball.
+\end{definition*}
+
+\begin{proposition*}
+  Let $(X,d)$ be a metric space, $(x_n) \subseteq X$ and $x \in X$. TFAE:
+  \begin{enumerate}[nosep]
+    \item $\lim_n (x_n) = x$ i.e. for every open ball $B$ at $x$, $\forall^\infty_n x_n \in B$
+    \item $\forall$ open $U \ni x$, $\forall^\infty_n x_n \in U$ i.e. $x$ need not be the center of the open set 
+    \item $\lim_{n \to \infty} d(x_n, x) = 0$
+  \end{enumerate}
+\end{proposition*}
+The second definition is the ``correct'' one, since it is general enough to also characterize convergence in topological spaces, as we will see later.
+\begin{proof}
+  \begin{itemize}[label=]
+  \item
+  \item $(1) \iff (3)$: A chasing-definitions proof (HW).
+  \item $(2) \implies (1)$: Trivial since open balls are open sets.
+  \item Let $U \ni x$ be open. Then there is a ball $B$ centered at $x$ with $B \subseteq U$. But by $(1)$, $\forall^\infty_n x_n \in B \subseteq U$.
+  \end{itemize}
+\end{proof}
+
+\begin{proposition*} (Uniqueness of Limits)\\
+  Let $(X,d)$ be a metric space and $(x_n) \subseteq X$ be a sequence. Then the limit of $(x_n)$, if exists, is unique, i.e. for all $x, x' \in X$ if $\lim_n x_n = x$ and $\lim_n x_n = x'$, then $x=x'$.
+\end{proposition*}
+\begin{proof}
+  Let $x \neq x'$ and suppose that $\lim_n x_n = x$. We show that $\lim_n x_n \neq x'$.
+
+  \pic   
+
+  Since $x \neq x'$, $d(x,x')>0$ so take $r \coloneqq \frac{1}{2}d(x,x')$. Then $B_r(x) \cap B_r(x') = \emptyset$. But $\forall^\infty_n x_n \in B_r(x)$, hence $\forall^\infty_n x_n \notin B_r(x')$, in particular, not $\forall^\infty_n x_n \in B_r(x')$.
+\end{proof}
+
+\textit{Observation.} In a metric space $(X,d)$, if a sequence converges, then it is \defn{bounded} i.e. $\{x_n\}$ is contained in some ball.
+\begin{proof}
+  Let $(x_n)$ converge to some $x \in X$. Then $\forall^\infty_n x_n \in B_1(x)$. Let $Y \coloneqq \{x_n: x_n \notin B_1(x)\}$. $Y$ is finite. Let $r \coloneqq \max_{y \in Y} d(x,y)$. Then $Y \subseteq B_{r+1}(x)$ but also $\{x_n : x_n \notin Y\} \subseteq B_1(x) \subseteq B_{r+1}(x)$ so $\{x_n\} \subseteq B_{r+1}(x)$.
+\end{proof}
+
+\begin{example}
+  \begin{itemize}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item Let $X$ be a set and $d$ be the discrete metric on it, i.e \[d(x,y) = \begin{cases}
+      1 & \text{ if } x \neq y \\
+      0 & \text{ if } x = y
+    \end{cases}.\]
+    For a sequence $(x_n)$ and $x \in X$, $\lim_n x_n = x \iff \forall^\infty_n x_n = x$, i.e. the sequence is eventually constant. 
+    \item Let $X = \Sigma^\N$ for some ctbl nonempty $\Sigma$ with the usual metric. Let $x_n = 0^n1^\infty = 00\dots011\dots$. Show that $\lim_n x_n = 0^\infty$.
+    
+    \noindent\soln{} Indeed, every ball at $0^\infty$ is of the form $[0^k]$ for some $k \in \N$ and $\forall n \geq k$, $x_n = 0^n11\dots \in [0^k]$.
+  \end{itemize}
+\end{example}
+
+The following proposition generalizes the last example.
+
+\begin{proposition*}
+  A sequence $(x_n) \subseteq \Sigma^\N$ converges to $x \in \Sigma^\N \iff$ for each index $i \in \N$ $\forall^\infty_n \, x_n(i) = x(i)$.
+\end{proposition*}
+\begin{proof}
+  HW.
+\end{proof}
+
+\lecture
+
+\subsubsection{Subsequences}
+\begin{definition*}
+  A subsequence $(x_{n_k})$ of a sequence $(x_n)$ is another sequence $(y_k)$ indexed by $k$ such that the $k^{th}$ member is the $n_k^{th}$ member of $(x_n)$ i.e. $y_k = x_{n_k}$, where $(n_k)$ is a strictly increasing sequence of natural numbers. In particular, $n_k \geq k$.
+\end{definition*}
+
+\begin{proposition*}
+  For a sequence $(x_n)$ in metric spaces $(X,d)$ and $x \in X$, TFAE:
+  \begin{enumerate}[nosep]
+    \item $(x_n)$ converges to $x$.
+    \item \textit{Every} subsequence $(x_{n_i})$ converges to $x$.
+    \item \textit{Every} subsequence $(x_{n_k})_{k \in \N}$ has a further subsequence $(x_{n_{k_\ell}})_{\ell \in \N}$ converging to $x$.
+  \end{enumerate}
+\end{proposition*}
+\begin{proof}
+  \begin{itemize}[label=]
+  \item
+  \item $(1) \implies (2)$: Trivial.
+  \item $(2) \implies (1)$: We prove the contrapositive ($\neg 1 \implies \neg 2$). Suppose $(x_n)$ doesn't converge to $x$ i.e. $\exists$ open $U \ni x$ such that not $\forall^\infty_n \, x_n \in U$ i.e. $\exists^\infty_n \, x_n \notin U$. Let $(n_k)$ be the sequence of these infinitely-many $n$'s i.e. $x_{n_k} \notin U$ for all $k \in \N$. Thus, $(x_{n_k})$ doesn't converge to $x$.
+  \item $(1) \iff (3)$: HW.
+  \end{itemize}
+\end{proof}
+
+\subsubsection{Closure and Characterization of Closed Sets via Limits}
+\begin{definition*}
+  Let $X$ be a metric space and $Y \subseteq X$. We call the smallest (w.r.t. $\subseteq$) closed set containing $Y$ the \defn{closure} of $Y$, denoted $\overline{Y}$. Such a set exists, namely:
+  \[\overline{Y} \coloneqq \bigcap \{C \subseteq X: C \text{ closed, } C \supseteq Y\},\]
+  noting that the $\overline{Y}$ is closed, being a nonempty (since $X$ itself is a closed set containing $Y$) intersection of closed sets. Also note that $Y \subseteq \overline{Y}$ by definition.
+\end{definition*}
+\begin{definition*}
+  Let $X$ be a metric space and $Y \subseteq X$. We say that a point $x \in X$ \defn{adheres} (or \defn{is a closure point of $Y$}) if every open neighbourhood $U \ni x$ \underline{meets} $Y$ (i.e. $U \cap Y \neq \emptyset$).
+\end{definition*}
+
+\begin{example}
+  \begin{itemize}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item In $\R$, $1$ adheres to $(0,1)$. Also, $\frac{1}{2}$ adheres.
+    \item In $\R$, every real $r \in \R$ adheres to $\Q$. That is, every interval containing a real number also contains (ctbly-many) rationals.
+  \end{itemize}
+\end{example}
+
+\begin{proposition*}
+  Let $X$ be a metric space and $Y \subseteq X$. Then 
+  \[\overline{Y} = \{x \in X : x \text{ adheres to } Y\}.\]
+\end{proposition*}
+\begin{proof}
+  $\supseteq$: Let $x$ adhere to $Y$. If $x \notin \overline{Y}$, then $\overline{Y}^c \ni x$ is open, so there is an open neighbourhood $U \ni x$ with $U \subseteq \overline{Y}^c$. Then $U \cap \overline{Y} = \emptyset$ hence $U \cap Y = \emptyset$ (since $Y \subseteq \overline{Y}$), contradicting that $x$ adheres to $Y$.
+
+  $\subseteq$: Let $x \in \overline{Y}$, and take any $U \ni x$. We need to show $U \cap Y \neq \emptyset$. But if $U \cap Y = \emptyset$, then $U^c \supseteq Y$ and $U^c$ is closed, so $\overline{Y} \subseteq U^c$ being the smallest such set. This means that $U \cap \overline{Y} = \emptyset$ contradicting $x \in U \cap \overline{Y}$.
+  \pic
+\end{proof}
+
+\begin{proposition*} (Characterization of Adherence via Limits) \\
+  Let $(X,d)$ be a metric space, $Y \subseteq X$, and $x \in X$. Then 
+  \[x \text{ adheres to } Y \iff \text{there is a sequence $(y_n) \subseteq Y$ with $\lim_n y_n = x$}.\]
+In particular, both are equivalent to $x \in \overline{Y}$.
+\end{proposition*}
+\begin{proof}
+  $\impliedby$: If $(y_n) \subseteq Y$ and $x = \lim_{n \to \infty} y_n$, then every open $U \ni x$ meets $\{y_n: n \in \N\} \subseteq Y$ so it also meets $Y$, hence $x$ adheres to $y$.
+
+  $\implies$: Suppose $x$ adheres to $Y$. Then for each $n \in \N^+$, there is $y_n \in B_{\frac 1 n}(x) \cap Y$ (\AC is used to define a sequence of such choices), so we obtain a sequence $(y_n ) \subseteq Y$ such that $d(y_n, x) < \frac 1 n \to 0$ as $n \to \infty$ so $\lim_n y_n = x$.
+\end{proof}
+
+\begin{corollary*} (Characterization of Closed Sets)\\
+  Let $X$ be a metric apace and $Y \subseteq X$. TFAE:
+  \begin{enumerate}[nosep]
+    \item $Y$ is closed (i.e. $Y^c$ open).
+    \item $Y = \overline{Y}$.
+    \item $Y$ contains all of its adherent points.
+    \item For any sequence $(y_n) \subseteq Y$ if $\lim_{n \to \infty} y_n$ exists then it is in $Y$
+  \end{enumerate}
+\end{corollary*}
+\begin{proof}
+  HW (should just be a quick check).
+\end{proof}
+
+\begin{corollary*}
+  In a metric space $X$, for $Y \subseteq X$, $\diam(Y) = \diam(\overline{Y})$.
+\end{corollary*}
+\begin{proof}
+  $\leq$ is trivial, so we show $\geq$. We give ourselves an $\epsilon > 0$ room and show that $\diam(Y) \geq \diam(\clo{Y})$ for arbitrary $\epsilon > 0$. By definition, $\exists \, x_1, x_2 \in \clo{Y}$ with 
+  \[d(x_1, x_2) \geq \sup_{z_1, z_2 \in \clo{Y}}d(z_1, z_2) - \epsilon/3.\]
+  But $x_1, x_2 \in \clo{Y}$, so $B_{\frac{\epsilon}{3}(x_1) \cap Y \neq \emptyset}$ and $B_{\frac{\epsilon}{3}}(x_2) \cap Y \neq \emptyset$, so take $y_i \in B_{\frac{\epsilon}{3}}(x_i)$ for $i = 1, 2$. Then 
+  \[d(x_1, x_2) \leq d(x_1, y_1) + d(y_1, y_2) + d(y_2, x_2) \leq d(y_1, y_2) + \frac{2}{3} \epsilon.\]
+  But also $\diam{\clo{Y}} - \frac{\epsilon}{3} \leq d(x_1,x_2)$, so 
+  \[d(y_1,y_2) \geq \diam{\clo{Y}} - \varepsilon, \]
+  hence $\diam{Y} \geq \diam{\clo{Y}} - \varepsilon$.
+\end{proof}
+
+\subsection{Cauchy Sequences and Completeness}
+\begin{definition*}
+  A sequence $(x_n)$ in a metric space $(X,d)$ is called \defn{Cauchy} if $\forall \epsilon > 0$ $\exists \, N \in \N$ $\forall n,m \geq N$, $d(x_n, x_m) \leq \epsilon$ i.e. the tails of the sequence are tighter and tighter. This is equivalent to saying that $\diam{\{x_n, x_{n+1}, x_{n+2}, \dots\}} \to 0$ as $n\to \infty$.
+\end{definition*}
+
+\textit{Observation.} Cauchy sequences are bdd.
+
+\begin{example}
+  \begin{itemize}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item Convergent sequences are Cauchy.
+    
+    \noindent\soln If $(x_n)$ converges to $X$, then $d(x_n,x) \to 0$, so $\forall \epsilon > 0$ a tail of the sequence is in $B_\epsilon(x)$ hence has diameter $\leq 2 \epsilon$.
+
+    \item A sequence $(x_n)$ is called \defn{contractive} if there is $\alpha \in (0,1)$ such that for all $n \in \N$:
+    \[d(x_{n+1}, x_{n+2}) \leq \alpha d(x_n, x_{n+1}).\]
+    \begin{proposition*}
+      Contractive sequences are Cauchy.
+    \end{proposition*}
+    \begin{proof}
+      HW.
+    \end{proof}
+    \underline{Caution:} The weaker condition $d(x_{n+1}, x_{n+2}) \leq d(x_n, x_{n+1})$ for all $n$ does not imply that $(x_n)$ are Cauchy. Take, for example $x_n \coloneqq \sum_{k=1}^{n}\frac{1}{k}$, then 
+    \[d(x_{n+1}, x_{n+2}) = \left|\sum_{k=1}^{n+2} \frac 1 k - \sum_{k=1}^{n+1}\frac 1 k\right| = \left|\frac{1}{n+2}\right| < \frac{1}{n+1} = d(x_n, x_{n+1})\]
+    but $(x_n)$ doesn't converge as $\sum_{k \in \N^+} \frac{1}{k}$ does not converge.
+  \end{itemize}
+\end{example}
+
+\begin{proposition*}
+  Let $X$ be a metric space and $(x_n) \subseteq X$ be a Cauchy sequence. IF some subsequence $(x_{n_k})$ converges to a point $x \in X$, then the whole $(x_n)$ converges to $x$.
+\end{proposition*}
+\begin{proof}
+  Suppose $\lim_{k \to \infty} x_{n_k} = x$. Fix $\epsilon>0$, then $(x_n)$ being Cauchy gives $n \in \N$ such that $\diam{\{x_n, x_{n+1}, \dots\}} \leq \frac{\varepsilon}{3}$. Then because $\lim_{k \to \infty}x_{n_k} = x$, there is some $n_k \geq n$ with $d(x_{n_k},x) < \frac{\epsilon}{3}$. But then $\forall m \geq n$, we have 
+  \[d(x_m,x) \leq d(x_m, x_n) + d(x_n, x_{n_k}) + d(x_{n_k}, x) < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.\]
+  Thus $\lim_{n \to \infty} x_n = x$.
+\end{proof}
+
+\begin{definition*}
+  A metric space $X$ is called \defn{complete} if every Cauchy sequences in it converges to some point in $X$.
+\end{definition*}
+
+\begin{example}
+  \begin{itemize}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item Let $X$ be a discrete metric space. Then the \textit{only} Cauchy sequences are the \textit{eventually constant} sequences i.e. sequences $(x_n)$ such that $\exists \, x \in X$ with $\forall^\infty_n x_n = x$. Hence every Cauchy sequence converges to a point in $X$, thus $X$ is complete.
+    
+    \item The space $X = (0,1]$ with the usual metric $d$ is \textit{incomplete} because the sequence $(\frac{1}{n})  \subseteq (0,1]$ is Cauchy (indeed, $\diam{\{\frac{1}{n}, \frac{1}{n+2}, \frac{1}{n+2}\}} = \frac{1}{n}) \to 0$ as $n \to \infty$ but $(\frac{1}{n})$ does not converge in $X \coloneqq (0,1]$.
+    
+    This example gives us some intuition as to how Cauchy sequences let us `feel' the missing points inside incomplete spaces.
+    \lecture
+    \item The space $X \coloneqq \Q$ is incomplete because $\exists \, (x_n) \subseteq \Q$ converging in $\R$ to $\sqrt{2}$, so it is Cauchy in $\R$, hence in $\Q$ but doesn't converge in $\Q$ since $\sqrt{2} \notin \Q$ and limits are unique in $\R$.
+  \end{itemize}
+\end{example}
+
+\begin{proposition*}
+  For a metric space $(X,d)$, TFAE:
+  \begin{enumerate}[nosep]
+    \item $(X,d)$ is complete.
+    \item Every $\subseteq$-decreasing sequence $C_n$ of closed, nonempty subsets of $X$ of \\ \underline{vanishing diameter} i.e. $\lim_{n \to \infty} \diam{(C_n)} \to 0$ has a nonempty intersection $\bigcap_{n \in \N} C_n \neq \emptyset$.
+    \item Every $\subseteq$-decreasing sequence $(B_n)$ of closed balls in $X$ of vanishing diameter has a nonempty intersection, that is, $\bigcap B_n \neq \emptyset$.
+  \end{enumerate}
+\end{proposition*}
+Typically, the third equivalence is used to prove completeness, while the second is useful if the completeness of a space is already known and is being used to prove something else.
+\begin{proof}
+\begin{itemize}[label=]
+  \item
+  \item $(2) \implies (3)$: Trivial because closed balls are closed sets.
+  \item $(1) \implies (2)$: Suppose $(X,d)$ is complete and let $(C_n)$ be a decreasing sequence of closed sets of vanishing diameter. Use \AC{} to get a sequence $(x_n)$ with $x_n \in C_n$ for each $n \in \N$. Then for each $n$, the tail $\{x_n, x_{n+1}, \dots\} \subseteq C_n$ because $C_n \supseteq C_{n+1} \supseteq C_{n+2} \cdots$. Hence $\diam{\{x_n,x_{n+1}, \dots \}} \leq \diam{(C_n)} \to 0$ as $n \to \infty$ so $(x_n)$ is Cauchy and hence converges to $x \in X$ (assume $X$ complete). But for each $n \in \N$, $\{x_n, x_{n+1}, \dots\} \subseteq C_n$, and converges to $x$, so $x \in C_n$ because $C_n$ is closed. Thus $x \in \cap_{k \in \N}C_n$. \pic
+  \item $(2) \implies (1)$: Assume $(2)$ and show $X$ is complete. Let $(x_n) \subseteq X$ be Cauchy i.e. $\diam{\{x_k, x_{k+1}, \dots\}} \to 0$ as $n \to \infty$. Then $C_n \coloneqq \clo{\{x_n, x_{n+1}, \dots\}}$ are decreasing, closed, nonempty sets or vanishing diameter because, as shown last time, $\diam{(C_n)} = \diam{\{x_n, x_{n+1}, \dots\}} \to 0$ as $n \to \infty$. Then $\exists \, x \in \cap_{n \in \N} C_n$. But then $d(x,x_n) \leq \diam{(C_n)} \to 0$ as $n \to \infty$ so $\lim_{n \to \infty} x_n=x$.
+  \item $(3) \implies (1)$: Let $(x_n)$ be a Cauchy sequence. \\ \textcolor{solarized-magenta}{Acceleration trick:} since a Cauchy sequence converges if some subsequence of it converges we may move to any subsequence and prove convergence for that. Choose the following subsequence:
+  
+  Let $n_0$ be large enough so that $\diam(\{x_{n_0}, x_{n_0 + 1}, \dots\}) < 1$. Suppose $n_0 < n_1 <\dots <n_k$ chosen, and take as $n_{k+1} > n_k$ a large enough number such that $\{x_{n_{k+1}}, x_{n_{k+1} + 1}, \dots\} < 2^{-(k+1)}$. Then $\diam{\{x_{n_k}, x_{n_{k+1}}, x_{n_{k+2}}}, \dots\} < 2^{-k}$. Moving to this subsequence, we may assume WLOG that the original sequence satisfied $\diam{\{x_n, x_{n+1}\}} < 2^{-n}$ for all $n$ to begin with, so we don't carry the double-indices with us.
+    
+  Now assume $\diam{\{x_n, x_{n+1}\}} < 2^{-n}$ for all $n \in \N$ and take 
+  \[B_n \coloneqq \clo{B}_{2*2^{-n}}(x_n).\]
+  Then $B_n \supseteq B_{n+1}$ because $d(x_n, x_{n+1}) < 2^{-n}$ so if $y \in B_{n+1} = \clo{B}_{2*2^{-(n+1)}}(x_{n+1})$, then 
+  \[d(y, x_{n+1}) \leq 2*2^{-(n+1)} = 2^{-n}\]
+  hence
+  \begin{align*}
+    d(x_n, y) & \leq d(x_n,x_{n+1}) + d(x_{n+1}, y) \\
+              & < 2^{-n} + 2^{-n} \\
+              = 2*2^{-n}
+  \end{align*}
+  so $y \in \clo{B}_{2*2^{-n}}(x_n) \eqqcolon B_n$. Finally, since $\diam{(B_n)} \leq 2*2*2^{-n} \to 0$ as $n \to \infty$, $\exists \, x \in \cap_{n \in \N}B_n$ by version $(3)$ of the proposition. Then $d(x,x_n) \leq \diam{(B_n)} \to 0$ as $n \to \infty$ so $\lim_{n \to \infty} x_n = x$.
+\end{itemize}
+\end{proof}
+\underline{Caution:} The vanishing diameter condition is absolutely necessary, contrary to one's intuition. For example, take the $0$-$1$ metric $d$ on $X \coloneqq \N$. Then this is a complete metric space as discussed last time. However, $C_n \coloneqq \{n, n+1, n+2, \dots\}$ is a closed set (every subset of $\N$ is closed because every subset is open since every singleton $\{n\} = B_\frac{1}{2}(n)$ is open in the discrete metric). But, $\diam{(C_n)} = 1$ for all $n \in \N$ so $\diam{(C_n)} \not\to 0$ and $\cap_{n \in \N} C_n = \emptyset$.
+
+Another example shows the failure of $(3)$ with balls and is left as HW.
+
+\begin{example}
+  \begin{itemize}[label=$\circ$, leftmargin=*, itemsep=1em]
+    \item $\R$ with the usual metric is complete. 
+    
+    \soln{} Let $B_n$ be a decreasing sequence of closed balls in $\R$. Thus, $B_n = [a_n, b_n]$ for some reals $a_n \leq b_n$.
+    \pic    
+    Then $a_0 \leq a_1 \leq a_2 \leq \cdots \leq b_n \leq b_{n-1} \leq \cdots \leq b_0$ so $(a_n)$ is bounded above (by say $b_0$) and $(b_n)$ is bounded below (say by $a_0$), hence $a \coloneqq \sup_n a_n$ and $b \coloneqq \inf_n b_n$ exist. But then for each $n \in \N$, $a_n \leq a \leq b_n$ and $a_n \leq b \leq b_n$ so $a_n \leq a \leq b \leq b_n$ hence $\emptyset \neq [a,b] \subseteq \cap_{n \in \N}[a_n, b_n]$.
+
+    \item For each nonempty ctbl $\Sigma$, $\Sigma^\N$ is complete. The proof is left as HW.
+  \end{itemize}
+\end{example}
+
+\begin{proposition*}
+  Let $(X,d)$ be a complete metric space. Any subset $Y \subseteq X$ is closed $\iff$ $(Y,d)$ is complete.
+\end{proposition*}
+\begin{proof}
+  $\implies$: Let $(y_n) \subseteq Y$ be a Cauchy sequence. Since $X$ is complete, $(y_n)$ has a limit $x \in X$. But $Y$ is closed so $x \in Y$ hence $(y_n)$ converges in $(Y,d)$ to $x \in Y$.
+
+  $\impliedby$: Let $(y_n) \subseteq Y$ converging to a point $x \in X$. In particular, $(y_n)$ is Cauchy, so by the completeness of $Y$, it must have a limit $y \in Y$. But then in $X$, $y_n \to x$ and $y_n \to y$ so by the uniqueness of limits, $x = y \in Y$.
+\end{proof}
+
+\begin{definition*}
+  A \defn{completion} of a metric space $(X,d)$ is a complete metric space $(\hat{X}, \hat{d})$ such that $\hat{X} \supseteq X$, $\hat{d}|_X = d$ and the closure of $X$ in $(\hat{X}, \hat{d})$ is all of $\hat{X}$.
+\end{definition*}
+
+\begin{theorem*}
+  Every metric space admits a completion which is unique up to isometric isomorphism. More precisely, if $(\hat{X}, \hat{d})$, $(\check{X}, \check{d})$ are two completions of $(X,d)$ then there is a bijective isometry $f: \hat{X} \to \check{X}$ such that $f|_X = \text{id}_X$.
+\end{theorem*}
+\begin{proof}
+  (Uniqueness) Suppose $(\hat{X}, \hat{d})$ and $(\check{X}, \check{d})$ are two completions, hence $X \subseteq \hat{X}$, $X \subseteq \check{X}$ and $\clo{X}^{\hat{d}} = \hat{X}$ and $\clo{X}^{\check{d}} = \check{X}$. Define $f: \hat{X} \to \check{X}$ as follows: for each $\hat{x} \in \hat{X}$, take a sequence $(x_n) \subseteq X$ converging to $\hat{x}$ and set $f(\hat{x}) \coloneqq$ the limit of $(x_n)$ inside $\check{X}$. The limit exists since $(x_n)$ is $d$-Cauchy hence $(x_n)$ converges to $\hat{x}$ in $(\hat{X}, \hat{d})$ and $\check{X}$ is complete. We need to show that $f$ is well-defined i.e. if $(x_n') \to \check{x}$ in $\check{X}$, then still the limit of $(x_n')$ in $\check{X}$ is the same as the limit of $(x_n)$ in $\check{X}$. But since both $(x_n)$ and $(x_n')$ converge to $\check{X}$ in $(\check{X}, \check{d})$, we have $d(x_n, x_n') \to 0$ as $n \to \infty$ so in $\check{X}$, their limits must coincide. It remains to verify that $f$ is as desired. 
+  \begin{enumerate}[label=\alph*), nosep]
+    \item For each $x \in X$, $f(x) = x$ since we can take $x_n \coloneqq x$.
+    \item $f$ is bijective because we can construct $f^{-1}$ exactly the same way as $f$ but with $\check{ }$ and $\hat{ }$ swapped.
+    \item $f$ is an isometry. Indeed, let $\hat{x}, \hat{y} \in \hat{X}$, choose $(x_n) \to \hat{x}$, $(y_n) \to \hat{y}$ in $\hat{X}$ so $f(\hat{x}) = \lim_{n \to \infty} x_n$ in $\check{X}$, $f(\hat{y}) = \lim_{n \to \infty} y_n$ in $\check{X}$. But $\hat{d}(\hat{x}, \hat{y}) = \lim_{n \to \infty}\hat{d}(x_n, y_n) = \lim_{n \to \infty} d(x_n, y_n) = \lim_{n\to \infty}d(x_n, y_n) = d{\check{x}, \check{y}} = d(f(\hat{x}), f(\hat{y}))$. So, it preserves distances and thus is injective.
+  \end{enumerate}
+\end{proof}
+\lecture
+Before we prove the existence of a completion, we need to discuss pseudo-metric spaces.
+\begin{definition*}
+  A pseudo-metric on a set $X$ is a function $d: X \times X \to [0, \infty)$ satisfying
+\end{definition*}
+
+\section{Topological Spaces}
+\subsection{Some subsection}
+\subsubsection{Some subsubsection}
+
+\rmkb{Some remark; ah yes.}
+ 
+\rmk{Remark.} Another remark, on one line.
+
+\begin{theorem*}\label{thm:1}
+  Colorful theorems are cool.
+\end{theorem*}
+
+\begin{axiom}
+  Some axiom.
+\end{axiom}
+
+\ex{Prove \Cref{thm:1}.
+  \begin{proof}
+    Some proof.
+  \end{proof}
+}
+
+\begin{definition*}[Some definition]
+  Some definition of a thing.\footnotemark
+\end{definition*}
+\footnotetext{Make a note here (a footnote, technically, but in the margin)}
+% * unfortunately, \footnote{} does not work in float environments, so you need to use the above trick
+
+\begin{proposition*}
+  Some proposition.
+  \begin{proof}
+    Some proof.
+  \end{proof}
+\end{proposition*}
+
+\begin{lemma}
+  Some lemma.
+\end{lemma}
+
+\begin{corollary*}
+  Some corollary.
+\end{corollary*}
+
+\end{document}
